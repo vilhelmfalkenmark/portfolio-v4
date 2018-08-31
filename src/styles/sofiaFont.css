@@ -1,0 +1,14 @@
+@font-face {
+  font-family: sofiaRegular;
+  src: url("fonts/sofia-regular.ttf");
+}
+
+@font-face {
+  font-family: sofiaMedium;
+  src: url("fonts/sofia-medium.ttf");
+}
+
+@font-face {
+  font-family: sofiaLight;
+  src: url("fonts/sofia-light.ttf");
+}

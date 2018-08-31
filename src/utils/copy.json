@@ -1,0 +1,40 @@
+{
+  "weddingDate": "14 april",
+  "hashTag": "#villeochjoe2019",
+  "couple": [
+    {
+      "name": "Johanna Olsson",
+      "phoneNumber": "+46708179638",
+      "prettyPhoneNumber": "0708-179638",
+      "mail": "johannaviola@gmail.com"
+    },
+    {
+      "name": "Vilhelm Falkenmark",
+      "phoneNumber": "+46705580198",
+      "prettyPhoneNumber": "0705-580198",
+      "mail": "vilhelmfalkenmark@gmail.com"
+    }
+  ],
+  "toastMasters": [
+    {
+      "name": "Robert Franzon",
+      "phoneNumber": "0706913083",
+      "prettyPhoneNumber": "0708-179638",
+      "mail": "johannaviola@gmail.com"
+    },
+    {
+      "name": "Robert Franzon",
+      "phoneNumber": "0706913083",
+      "prettyPhoneNumber": "0708-179638",
+      "mail": "johannaviola@gmail.com"
+    }
+  ],
+  "location": {
+    "title": "Carolas Eko",
+    "address": "Testvägen 1, 112 44, Stockholm",
+    "prettyUrl": "carolaseko.se",
+    "websiteUrl": "http://carolaseko.se/",
+    "phoneNumber": "08-111111",
+    "publicTransport": "Buss nummer 1 till Testvägen eller Tunnelbana till Universitet"
+  }
+}

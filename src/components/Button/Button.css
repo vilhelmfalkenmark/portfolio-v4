@@ -1,0 +1,80 @@
+@import "variables";
+
+/* SOLID BUTTON MIXIN */
+@define-mixin solidButton $color {
+  color: var(--white);
+  background: $color;
+  border: 1px solid $color;
+  transition: background 0.2s ease;
+
+  &.isDisabled {
+    opacity: 0.4;
+  }
+
+  &:not(.isDisabled) {
+    &:hover {
+      background: color($color blackness(25%));
+    }
+    &:active {
+      background: color($color blackness(20%));
+    }
+  }
+}
+
+/* OUTLINED BUTTON MIXIN */
+@define-mixin outlinedButton $color {
+  color: $color;
+  background: var(--white);
+  border: 1px solid $color;
+
+  &.isDisabled {
+    opacity: 0.4;
+  }
+
+  &:not(.isDisabled) {
+    &:hover {
+      background-color: var(--light-grey);
+    }
+    &:active {
+      background-color: var(--medium-grey);
+    }
+  }
+}
+
+.button {
+  padding: var(--default-margin) var(--double-default-margin);
+  display: inline-block;
+  border: none;
+  outline: 0;
+  min-width: 10rem;
+  cursor: pointer;
+  border-radius: var(--double-default-margin);
+
+  /* Solid buttons */
+
+  &_grey_solid {
+    @mixin solidButton var(--text-grey);
+  }
+
+  &_green_solid {
+    @mixin solidButton var(--green);
+  }
+
+  &_red_solid {
+    @mixin solidButton var(--red);
+  }
+
+  /* Outlined buttons */
+
+  &_grey_outlined {
+    @mixin outlinedButton var(--text-grey);
+  }
+
+  &_green_outlined {
+    @mixin outlinedButton var(--green);
+  }
+
+  &_red_outlined {
+    @mixin outlinedButton var(--red);
+  }
+}

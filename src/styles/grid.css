@@ -1,0 +1,63 @@
+@import "variables";
+@import "breakpoints";
+
+@define-mixin flexRow $margin: 1rem {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
+  margin-left: calc($margin/2 * -1);
+  margin-right: calc($margin/2 * -1);
+}
+
+@define-mixin flexGtrCol $columns: 2, $gutter: 1rem {
+  flex-basis: calc(1 / $columns * 100% - $gutter);
+  margin: 0 calc($gutter/2) $gutter calc($gutter/2);
+}
+
+@define-mixin flexCol $span, $columns: 2, $margin: 0px {
+}
+
+@define-mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@define-mixin landingPageContainer {
+  margin-top: 0;
+
+  @media (--viewport-min-960) {
+    padding-top: var(--header-desk-height);
+  }
+}
+
+@define-mixin pageContainer {
+  margin-top: 1rem;
+
+  @media (--viewport-min-960) {
+    margin-top: var(--header-desk-height);
+  }
+}
+
+@define-mixin contentContainer {
+  flex: 1 0;
+  width: calc(100% - var(--default-margin));
+  max-width: var(--page-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--double-default-margin) 0;
+
+  @media (--viewport-min-768) {
+    width: calc(100% - var(--double-default-margin));
+  }
+
+  @media (--viewport-min-960) {
+    width: calc(100% - var(--double-default-margin));
+  }
+}
+
+@define-mixin card $padding: 2rem {
+  background-color: var(--white);
+  padding: $padding;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.12);
+}

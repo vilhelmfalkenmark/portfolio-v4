@@ -1,0 +1,33 @@
+@import "grid";
+@import "breakpoints";
+@import "skeleton";
+@import "variables";
+
+.list {
+  list-style: none;
+  @mixin flexRow 1rem;
+}
+
+.item {
+  position: relative;
+  /* @mixin breakpoint(1px, 450px) {
+    @mixin flex-gtr-col(2, 1rem);
+  }
+  @mixin breakpoint(451px, 759px) {
+    @mixin flex-gtr-col(3, 1rem);
+  }
+  @mixin breakpoint(760px) {
+    @mixin flex-gtr-col(4, 1rem);
+  } */
+}
+
+.skeleton {
+  @mixin skeleton;
+}
+
+.skeletonBlock {
+  z-index: var(--z-index-first);
+  background-color: white;
+  display: block;
+  position: absolute;
+}

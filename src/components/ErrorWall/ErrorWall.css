@@ -1,0 +1,19 @@
+@import "variables";
+@import "grid";
+
+.container {
+  @mixin card;
+  min-height: 300px;
+}
+
+.innerContainer {
+  @mixin contentContainer;
+}
+
+.heading {
+  text-align: center;
+}
+
+.link {
+  color: var(--green);
+}

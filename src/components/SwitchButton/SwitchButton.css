@@ -1,0 +1,67 @@
+@import "variables";
+@import "mixins";
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.buttonContainer {
+  @mixin flexCenter;
+  width: 2.8rem;
+  height: 1.5rem;
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+.button {
+  border: none;
+  outline: none;
+  outline: 0;
+  position: absolute;
+  background: none;
+  top: 0;
+  padding: 0;
+  bottom: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.simulator {
+  width: 100%;
+  height: 0.8rem;
+  display: block;
+  border-radius: 1rem;
+  position: relative;
+  transition: background 0.1s ease;
+  &:after {
+    transition: transform 0.2s ease;
+    content: "";
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    top: -0.35rem;
+    border-radius: 50%;
+  }
+
+  &_isOn {
+    background-color: lighten(var(--green), 25%);
+    &:after {
+      transform: translateX(0rem);
+      background-color: var(--green);
+    }
+  }
+
+  &_isOff {
+    background-color: lighten(var(--red), 25%);
+    &:after {
+      transform: translateX(-1.5rem);
+      background-color: var(--red);
+    }
+  }
+}
+
+.label {
+  margin-left: 1rem;
+}

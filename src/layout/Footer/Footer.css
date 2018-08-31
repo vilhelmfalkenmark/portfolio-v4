@@ -1,0 +1,53 @@
+@import "variables";
+@import "grid";
+@import "breakpoints";
+
+.container {
+  background: var(--text-grey);
+  color: var(--white);
+  width: 100%;
+  flex-shrink: 0;
+
+  @media (--viewport-max-959) {
+    padding-bottom: var(--header-mobile-height);
+  }
+}
+
+.innerContainer {
+  @mixin contentContainer;
+}
+
+.grid {
+  @mixin flexRow 0;
+
+  margin-bottom: var(--default-margin);
+
+  @media (--viewport-min-768) {
+    @mixin flexRow 1rem;
+  }
+}
+
+.column {
+  border-bottom: 1px solid var(--white);
+  padding-bottom: var(--default-margin);
+
+  @mixin flexGtrCol 1, var(--default-margin);
+
+  @media (--viewport-min-768) {
+    @mixin flexGtrCol 3, var(--default-margin);
+  }
+}
+
+.hashTag {
+  text-align: center;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-bottom: var(--double-default-margin);
+}
+
+.scrollButton.scrollButton {
+  margin: 0 auto;
+  border: none;
+}
