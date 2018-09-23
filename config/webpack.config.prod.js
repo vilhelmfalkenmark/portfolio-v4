@@ -1,4 +1,4 @@
-// const autoprefixer = require("autoprefixer");
+const autoprefixer = require("autoprefixer");
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -173,31 +173,74 @@ module.exports = {
           // tags. If you use code splitting, however, any async bundles will still
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
+          // {
+          //   test: /\.css$/,
+          //   use: [
+          //     require.resolve("classnames-loader"),
+          //     require.resolve("isomorphic-style-loader"),
+          //     {
+          //       loader: require.resolve("css-loader"),
+          //       options: {
+          //         importLoaders: 1,
+          //         sourceMap: shouldUseSourceMap,
+          //         // CSS Modules https://github.com/css-modules/css-modules
+          //         modules: true,
+          //         localIdentName: "[hash:base64:5]"
+          //       }
+          //     },
+          //     {
+          //       loader: require.resolve("postcss-loader"),
+          //       options: {
+          //         config: {
+          //           path: paths.postcssConfig
+          //         }
+          //       }
+          //     }
+          //   ]
+          // },
           {
             test: /\.css$/,
-            use: [
-              require.resolve("classnames-loader"),
-              require.resolve("isomorphic-style-loader"),
-              {
-                loader: require.resolve("css-loader"),
+            loader: ExtractTextPlugin.extract({
+              fallback: {
+                loader: require.resolve("style-loader"),
                 options: {
-                  importLoaders: 1,
-                  sourceMap: shouldUseSourceMap,
-                  // CSS Modules https://github.com/css-modules/css-modules
-                  modules: true,
-                  localIdentName: "[hash:base64:5]"
+                  hmr: false
                 }
               },
-              {
-                loader: require.resolve("postcss-loader"),
-                options: {
-                  config: {
-                    path: paths.postcssConfig
+              use: [
+                {
+                  loader: require.resolve("css-loader"),
+                  options: {
+                    importLoaders: 2,
+                    modules: true,
+                    localIdentName: `[name]_[local]_[hash:base64:5]`
+                  }
+                },
+                {
+                  // NOTE postcss-loader is used to handle autoprefixing and flexbugs
+                  loader: require.resolve("postcss-loader"),
+                  options: {
+                    // Necessary for external CSS imports to work
+                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                    ident: "postcss",
+                    plugins: () => [
+                      require("postcss-flexbugs-fixes"),
+                      autoprefixer({
+                        browsers: [
+                          ">1%",
+                          "last 4 versions",
+                          "Firefox ESR",
+                          "not ie < 11"
+                        ],
+                        flexbox: "no-2009"
+                      })
+                    ]
                   }
                 }
-              }
-            ]
+              ]
+            })
           },
+
           // SVG sprite loader
           {
             test: /\.svg$/,
@@ -284,7 +327,6 @@ module.exports = {
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
       filename: cssFilename,
-      // filename: "styles.css",
       allChunks: true
     }),
     // Generate a manifest file which contains a mapping of all asset filenames

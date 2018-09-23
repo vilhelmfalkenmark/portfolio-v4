@@ -169,8 +169,7 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              require.resolve("classnames-loader"),
-              require.resolve("isomorphic-style-loader"),
+              require.resolve("style-loader"),
               {
                 loader: require.resolve("css-loader"),
                 options: {

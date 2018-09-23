@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const promiseResolve = data =>
+  console.log(data) ||
   new Promise((resolve, reject) => {
     resolve(data);
     reject(err => {
@@ -24,11 +25,15 @@ module.exports = contentful => {
         });
       promiseResolve(projects)
         .then(data => {
+          console.log(data);
+
           response.json({
             data
           });
         })
         .catch(e => {
+          console.error(e);
+
           response.json({
             data: "Error när info skulle hämtas"
           });

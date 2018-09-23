@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 // import mongodb from "mongodb";
 import path from "path";
 
+import serverSideRenderer from "./ssr";
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +30,6 @@ const apiKeys = {
     lensPath(["CONTENTFUL_ACCESS_TOKEN"]),
     process.env
   )
-  // MONGODB_URI: view(lensPath(["MONGODB_URI"]), process.env)
 };
 
 // Create link to React build directory
@@ -45,36 +46,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to MongoDB
-// mongodb.MongoClient.connect(
-//   apiKeys.MONGODB_URI,
-//   (err, database) => {
-//     if (err) {
-//       console.log(err);
-//       process.exit(1);
-//     }
-
-//     // Register Api routes
-//     const apiRouter = require("./api")({ database, apiKeys });
-//     app.use("/api", apiRouter);
-//     // Redirect every 404 to the client index.html file
-//     app.get("*", (req, res) => {
-//       res.sendFile(path.resolve(__dirname, "../build", "index.html"));
-//     });
-
-//     app.listen(PORT, () => {
-//       console.log("Ansluten till mongodb databas och Bröllops apiet mår bra!");
-//     });
-//   }
-// );
-
 const apiRouter = require("./api")({ apiKeys });
-
 app.use("/api", apiRouter);
-// Redirect every 404 to the client index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
-});
+
+// Redirect every get request that is not /api to the SSR handler
+// const ssrRouter = require("./ssr");
+
+app.get(/^(?!.*api).*$/, serverSideRenderer());
 
 app.listen(PORT, () => {
   console.log(`Lyssnar på port ${PORT}`);

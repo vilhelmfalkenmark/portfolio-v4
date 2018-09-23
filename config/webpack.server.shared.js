@@ -2,6 +2,7 @@ const nodeExternals = require("webpack-node-externals");
 const path = require("path");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const paths = require("./paths");
 
 module.exports = {
   entry: ["./server"],
@@ -9,12 +10,19 @@ module.exports = {
   resolve: {
     extensions: [".js"],
     alias: {
-      entities: path.resolve(__dirname, "src/entities/"),
-      server: path.resolve(__dirname, "src/server/"),
-      test: path.resolve(__dirname, "src/test/"),
-      connector: path.resolve(__dirname, "src/connector"),
-      utils: path.resolve(__dirname, "src/utils/"),
-      app: path.resolve(__dirname)
+      app: path.resolve(__dirname, "src"),
+      build: path.resolve(__dirname, "build"),
+      // client
+      actions: path.resolve(paths.appSrc, "actions"),
+      assets: path.resolve(paths.appSrc, "assets"),
+      reducers: path.resolve(paths.appSrc, "reducers"),
+      store: path.resolve(paths.appSrc, "store"),
+      entrypoints: path.resolve(paths.appSrc, "entrypoints"),
+      components: path.resolve(paths.appSrc, "components"),
+      utils: path.resolve(paths.appSrc, "utils"),
+      layout: path.resolve(paths.appSrc, "layout"),
+      router: path.resolve(paths.appSrc, "router"),
+      fonts: path.resolve(paths.appSrc, "styles/fonts")
     }
   },
   modules: {
@@ -34,7 +42,12 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.json$/,
+        use: "json-loader"
+      },
+      { test: /\.css$/, use: "ignore-loader" }
     ]
   },
   plugins: [

@@ -3,9 +3,7 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import routes, { HOME_ROUTE } from "router/routes";
 import SVG from "components/SVG";
-import Logo from "components/Logo";
 import WithStyles from "layout/WithStyles";
-import copy from "utils/copy";
 
 import s from "./Header.css";
 
@@ -17,9 +15,7 @@ const Header = ({ location }) => (
       })}
     >
       <div className={s({ inner: true })}>
-        <NavLink to={HOME_ROUTE.slug} className={s({ logoLink: true })}>
-          <Logo copy={copy.hashTag} />
-        </NavLink>
+        <NavLink to={HOME_ROUTE.slug} className={s({ logoLink: true })} />
         <nav className={s({ navigation: true })}>
           <ul className={s({ list: true })}>
             {routes.map((route, index) => (

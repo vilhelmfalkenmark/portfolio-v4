@@ -3,6 +3,8 @@ const contentful = require("contentful");
 const router = express.Router();
 
 module.exports = function({ apiKeys }) {
+  console.log(apiKeys, "hej från API!");
+
   const contentfulClient = contentful.createClient({
     space: apiKeys.CONTENTFUL_SPACE,
     accessToken: apiKeys.CONTENTFUL_ACCESS_TOKEN
@@ -16,7 +18,7 @@ module.exports = function({ apiKeys }) {
   router.use(
     "/instagram",
     require("./instagram")(apiKeys.INSTAGRAM_ACCESS_TOKEN)
-  ); // <-- Will live on endpoint /api/instagram
+  );
 
   return router;
 };

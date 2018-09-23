@@ -4,7 +4,7 @@ import Button from "components/Button";
 import Scroll from "react-scroll";
 import Logo from "components/Logo";
 
-import copy from "utils/copy";
+// import copy from "utils/copy";
 
 import { BUTTON_TYPE_GREY } from "utils/constants/buttonTypes";
 
@@ -36,17 +36,17 @@ class Footer extends Component {
             <div className={s({ column: true })}>
               <h4>Bra att veta</h4>
               <p className={s({ goodToKnow: true })}>
-                {`Bröllopet kommer äga rum den ${copy.weddingDate} på
+                {/* {`Bröllopet kommer äga rum den ${copy.weddingDate} på
                 ${copy.location.title}. Addressen dit är ${
                   copy.location.address
                 }. Det kommer serveras alkoholfria och vegetariska alternativ. Djur undandbedes. Om ni åker kommunalt så rekommenderar vi ${
                   copy.location.publicTransport
-                }.`}
+                }.`} */}
               </p>
             </div>
           </div>
           {/* GRID END */}
-          <h4 className={s({ hashTag: true })}>{copy.hashTag} på Instagram</h4>
+          {/* <h4 className={s({ hashTag: true })}>{copy.hashTag} på Instagram</h4> */}
           <Instagram />
         </div>
         <Logo />
