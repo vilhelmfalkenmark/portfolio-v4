@@ -5,7 +5,7 @@ const Dotenv = require("dotenv-webpack");
 const paths = require("./paths");
 
 module.exports = {
-  entry: ["./server"],
+  entry: ["./server/babelRegister"],
   target: "node",
   resolve: {
     extensions: [".js"],
@@ -37,14 +37,14 @@ module.exports = {
             options: {
               plugins: [
                 "transform-object-rest-spread",
-                ["inline-import"],
-                [
-                  "css-modules-transform",
-                  {
-                    generateScopedName: "[name]_[local]",
-                    extensions: [".css"]
-                  }
-                ]
+                ["inline-import"]
+                // [
+                //   "css-modules-transform",
+                //   {
+                //     generateScopedName: "[name]_[local]",
+                //     extensions: [".css"]
+                //   }
+                // ]
               ],
               // Make sure cacheDirectory is disabled so that Babel
               // always rebuilds dependent modules

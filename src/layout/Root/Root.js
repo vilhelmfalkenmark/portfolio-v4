@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter,
   Route,
-  Switch,
-  withRouter
+  // Switch,
+  withRouter,
+  NavLink
 } from "react-router-dom";
+
+// import Loadable from "react-loadable";
 
 // import routes from "router/routes";
 // import Header from "layout/Header";
 // import Footer from "layout/Footer";
 // import NotFound from "entrypoints/NotFound";
 // import WithStyles from "layout/WithStyles";
+
+import Home from "entrypoints/Home";
+import Movies from "entrypoints/Movies";
 
 import classNames from "classnames/bind";
 import styles from "./Root.css";
@@ -31,17 +37,57 @@ const s = classNames.bind(styles);
 
 // const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
+function Loading() {
+  return <div>Loading...</div>;
+}
+
+const ROUTES = [
+  {
+    path: "/",
+    exact: true,
+    // component: Loadable({
+    //   loader: () => import("../../entrypoints/Home"),
+    //   loading: Loading
+    // }),
+    component: Home,
+    key: 389972
+  },
+  {
+    path: "/movies",
+    exact: true,
+    component: Movies,
+
+    // component: Loadable({
+    //   loader: () => import("../../entrypoints/Movies"),
+    //   loading: Loading
+    // }),
+    key: 35145
+  }
+];
+
 const Root = () => (
-  // <Router>
-  // <ScrollToTopWithRouter>
   <div className={s({ content: true })}>
-    <h3 className={s({heading: true})}>hejsan!!!</h3>
-		<p className={s({paragraph: true})}>Jag kommer från servern</p>
+    <ul>
+      <li>
+        <NavLink to="">Hem</NavLink>
+      </li>
+      <li>
+        <NavLink to="/movies">Filmer</NavLink>
+      </li>
+    </ul>
+    {ROUTES.map(route => (
+      <Route
+        path={route.path}
+        component={route.component}
+        exact={route.exact}
+        key={route.key}
+      />
+    ))}
+
+    {/* <ScrollToTopWithRouter> */}
+
+    {/* // </ScrollToTopWithRouter> */}
   </div>
-  // </ScrollToTopWithRouter>
-  // </Router>
 );
 
-export default Root;
-
-// export default WithStyles(Root, s);
+export default withRouter(Root);
