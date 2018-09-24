@@ -35,7 +35,17 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
-              plugins: ["transform-object-rest-spread", ["inline-import"]],
+              plugins: [
+                "transform-object-rest-spread",
+                ["inline-import"],
+                [
+                  "css-modules-transform",
+                  {
+                    generateScopedName: "[name]_[local]",
+                    extensions: [".css"]
+                  }
+                ]
+              ],
               // Make sure cacheDirectory is disabled so that Babel
               // always rebuilds dependent modules
               cacheDirectory: false // default

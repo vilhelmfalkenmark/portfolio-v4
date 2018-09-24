@@ -6,7 +6,7 @@
         [
           "css-modules-transform",
           {
-            "generateScopedName": "[hash:8]",
+            "generateScopedName": "[name]_[local]_[hash:4]",
             "extensions": [".css"]
           }
         ]

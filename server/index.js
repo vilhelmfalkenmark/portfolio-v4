@@ -4,12 +4,15 @@ import bodyParser from "body-parser";
 // import mongodb from "mongodb";
 import path from "path";
 
-import serverSideRenderer from "./ssr";
+import serverSideRenderer from "./ssr/middleware";
+import apiHandler from "./api";
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+const router = express.Router();
 
 const PORT = process.env.PORT || 5000;
 
@@ -33,10 +36,10 @@ const apiKeys = {
 };
 
 // Create link to React build directory
-app.use(express.static(path.resolve(__dirname, "../build")));
+// router.use(express.static(path.resolve(__dirname, "../build")));
 
 // Handle CORS
-app.use((req, res, next) => {
+router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH");
   res.header(
@@ -46,13 +49,15 @@ app.use((req, res, next) => {
   next();
 });
 
-const apiRouter = require("./api")({ apiKeys });
-app.use("/api", apiRouter);
+router.use("/api", apiHandler({ apiKeys }));
 
-// Redirect every get request that is not /api to the SSR handler
-// const ssrRouter = require("./ssr");
+router.use("^/$", serverSideRenderer);
 
-app.get(/^(?!.*api).*$/, serverSideRenderer());
+router.use(
+  express.static(path.resolve(__dirname, "..", "build"), { maxAge: "30d" })
+);
+
+app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Lyssnar på port ${PORT}`);

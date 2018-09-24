@@ -1,10 +1,12 @@
-const express = require("express");
+// const express = require("express");
+// const contentful = require("contentful");
+import express from "express";
 const contentful = require("contentful");
+
 const router = express.Router();
 
-module.exports = function({ apiKeys }) {
-  console.log(apiKeys, "hej från API!");
-
+export default ({ apiKeys }) => {
+	
   const contentfulClient = contentful.createClient({
     space: apiKeys.CONTENTFUL_SPACE,
     accessToken: apiKeys.CONTENTFUL_ACCESS_TOKEN

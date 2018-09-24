@@ -17,25 +17,26 @@ import styles from "./Root.css";
 
 const s = classNames.bind(styles);
 
-class ScrollToTop extends Component {
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      window.scrollTo(0, 0);
-    }
-  }
+// class ScrollToTop extends Component {
+//   componentDidUpdate(prevProps) {
+//     if (this.props.location !== prevProps.location) {
+//       window.scrollTo(0, 0);
+//     }
+//   }
 
-  render() {
-    return this.props.children;
-  }
-}
+//   render() {
+//     return this.props.children;
+//   }
+// }
 
-const ScrollToTopWithRouter = withRouter(ScrollToTop);
+// const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
 const Root = () => (
   // <Router>
   // <ScrollToTopWithRouter>
   <div className={s({ content: true })}>
-    <h3>hejsan!!!</h3>
+    <h3 className={s({heading: true})}>hejsan!!!</h3>
+		<p className={s({paragraph: true})}>Jag kommer från servern</p>
   </div>
   // </ScrollToTopWithRouter>
   // </Router>

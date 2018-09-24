@@ -1,20 +1,11 @@
 import serverRenderer from "./middleware";
 
-const express = require("express");
+import express from "express";
+
 const router = express.Router();
-
-// module.exports = function() {
-//   console.log("hej!");
-
-//   router.get("*", serverRenderer);
-
-//   return router;
-// };
-
 export default () => {
-  console.log("hej från SSR!");
-
+	console.log("serverRenderer Kallas på!");
+	
   router.get("*", serverRenderer);
-
   return router;
 };
