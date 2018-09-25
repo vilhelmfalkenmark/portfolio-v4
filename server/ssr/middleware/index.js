@@ -1,17 +1,38 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
+import Loadable from "react-loadable";
 
-// import our main App component
 import Root from "layout/Root";
+
+// Client side build manifest
+import manifest from "build/asset-manifest.json";
 
 const path = require("path");
 const fs = require("fs");
-require("ignore-styles");
+
+const extractAssets = (assets, chunks) =>
+  Object.keys(assets)
+    .filter(asset => chunks.indexOf(asset.replace(".js", "")) > -1)
+    .map(k => assets[k]);
 
 export default (req, res, next) => {
-  // point to the html file created by CRA's build tool
-  const filePath = path.resolve(
+  const context = {};
+  const modules = [];
+
+  const app = ReactDOMServer.renderToString(
+    <Loadable.Capture report={m => modules.push(m)}>
+      <StaticRouter location={req.url} context={context}>
+        <Root />
+      </StaticRouter>
+    </Loadable.Capture>
+  );
+
+  const extraChunks = extractAssets(manifest, modules).map(
+    c => `<script type="text/javascript" src="/${c}"></script>`
+  );
+
+  const indexFile = path.resolve(
     __dirname,
     "..",
     "..",
@@ -20,27 +41,16 @@ export default (req, res, next) => {
     "index.html"
   );
 
-  console.log(filePath);
-
-  const context = {};
-  console.log(req.url, " <-- req.url");
-
-  // render the app as a string
-  const html = ReactDOMServer.renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <Root />
-    </StaticRouter>
-  );
-
-  fs.readFile(filePath, "utf8", (err, htmlData) => {
+  fs.readFile(indexFile, "utf8", (err, data) => {
     if (err) {
-      console.error("err", err);
+      console.error("Something went wrong:", err);
       return res.status(500).send("Oops, better luck next time!");
     }
 
-    // inject the rendered app into our html and send it
     return res.send(
-      htmlData.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+      data
+        .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+        .replace("</body>", `${extraChunks.join("")}</body>`)
     );
   });
 };

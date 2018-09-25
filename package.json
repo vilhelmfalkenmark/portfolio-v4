@@ -53,6 +53,7 @@
     "html-webpack-plugin": "2.29.0",
     "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
+    "import-inspector": "^2.0.0",
     "inline-import": "^1.2.4",
     "isomorphic-style-loader": "^4.0.0",
     "jest": "20.0.4",

@@ -7,13 +7,13 @@ require("babel-register")({
     "syntax-dynamic-import",
     "dynamic-import-node",
     "react-loadable/babel",
-    // [
-    //   "import-inspector",
-    //   {
-    //     webpackRequireWeakId: true,
-    //     serverSideRequirePath: true
-    //   }
-    // ],
+    [
+      "import-inspector",
+      {
+        webpackRequireWeakId: true,
+        serverSideRequirePath: true
+      }
+    ],
     [
       "module-resolver",
       {
@@ -25,7 +25,8 @@ require("babel-register")({
           utils: "./src/utils",
           layout: "./src/layout",
           styles: "./src/styles",
-          entrypoints: "./src/entrypoints"
+          entrypoints: "./src/entrypoints",
+          build: "./build"
         }
       }
     ],

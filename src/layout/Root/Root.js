@@ -7,7 +7,7 @@ import {
   NavLink
 } from "react-router-dom";
 
-// import Loadable from "react-loadable";
+import Loadable from "react-loadable";
 
 // import routes from "router/routes";
 // import Header from "layout/Header";
@@ -15,8 +15,8 @@ import {
 // import NotFound from "entrypoints/NotFound";
 // import WithStyles from "layout/WithStyles";
 
-import Home from "entrypoints/Home";
-import Movies from "entrypoints/Movies";
+// import Home from "entrypoints/Home";
+// import Movies from "entrypoints/Movies";
 
 import classNames from "classnames/bind";
 import styles from "./Root.css";
@@ -45,22 +45,25 @@ const ROUTES = [
   {
     path: "/",
     exact: true,
-    // component: Loadable({
-    //   loader: () => import("../../entrypoints/Home"),
-    //   loading: Loading
-    // }),
-    component: Home,
+    component: Loadable({
+      loader: () =>
+        import(/* webpackChunkName: "HomeEntrypoint" */ "../../entrypoints/Home"),
+      loading: Loading,
+      modules: ["HomeEntrypoint"]
+    }),
+    // component: Home,
     key: 389972
   },
   {
     path: "/movies",
     exact: true,
-    component: Movies,
-
-    // component: Loadable({
-    //   loader: () => import("../../entrypoints/Movies"),
-    //   loading: Loading
-    // }),
+    // component: Movies,
+    component: Loadable({
+      loader: () =>
+        import(/* webpackChunkName: "MoviesEntrypoint" */ "../../entrypoints/Movies"),
+      loading: Loading,
+      modules: ["MoviesEntrypoint"] // <-- Tells react-loadable that this component requires the chunkfile named MoviesEntrypoint
+    }),
     key: 35145
   }
 ];

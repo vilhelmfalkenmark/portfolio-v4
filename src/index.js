@@ -2,15 +2,29 @@ import React from "react";
 import { hydrate } from "react-dom";
 import Root from "layout/Root";
 import { Provider } from "react-redux";
-import store from "./store";
-
+import Loadable from "react-loadable";
 import { BrowserRouter } from "react-router-dom";
 
-hydrate(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Root />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
-);
+import store from "./store";
+
+// hydrate(
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <Root />
+//     </BrowserRouter>
+//   </Provider>,
+//   document.getElementById("root")
+// );
+
+window.onload = () => {
+  Loadable.preloadReady().then(() => {
+    hydrate(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Root />
+        </BrowserRouter>
+      </Provider>,
+      document.getElementById("root")
+    );
+  });
+};
