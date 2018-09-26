@@ -20,6 +20,7 @@ const Movies = ({}) => {
       </ul>
       <h1>Min favoritfilm är {favoriteMovie}</h1>
       <button onClick={() => clicker()}>Klicka här!</button>
+			<p>Hejsan!</p>
     </div>
   );
 };

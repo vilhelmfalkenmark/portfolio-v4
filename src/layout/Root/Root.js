@@ -38,7 +38,13 @@ const s = classNames.bind(styles);
 // const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
 function Loading() {
-  return <div>Loading...</div>;
+  return <div>
+	<h1>LADDAR</h1>
+	<h1>LADDAR</h1>
+	<h1>LADDAR</h1>
+	<h1>LADDAR</h1>
+	<h1>LADDAR</h1>
+	</div>;
 }
 
 const ROUTES = [
@@ -65,6 +71,18 @@ const ROUTES = [
       modules: ["MoviesEntrypoint"] // <-- Tells react-loadable that this component requires the chunkfile named MoviesEntrypoint
     }),
     key: 35145
+  },
+  {
+    path: "/movies/:movietitle",
+    exact: true,
+    // component: Movies,
+    component: Loadable({
+      loader: () =>
+        import(/* webpackChunkName: "MovieDetailsEntrypoint" */ "../../entrypoints/MovieDetails"),
+      loading: Loading,
+      modules: ["MovieDetailsEntrypoint"]
+    }),
+    key: 4894984
   }
 ];
 

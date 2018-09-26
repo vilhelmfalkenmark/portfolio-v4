@@ -97,14 +97,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start_ready_build": "node prod_server",
+    "start": "node prod_server/index.js",
     "start:client": "NODE_ENV=development node scripts/start.js",
-    "start:server": "NODE_ENV=development concurrently \"yarn run start:webpackServer\" \"nodemon dev_server/index.js\"",
-    "start:naked": "NODE_ENV=development nodemon server/babelRegister.js",
-    "start:webpackServer": "rm -rf dev_server/index.js && webpack --config config/webpack.server.dev.js --watch",
+    "start:server": "NODE_ENV=development nodemon server/babelRegister.js",
     "build": "npm run build:server && npm run build:client",
     "build:client": "node scripts/build.js",
-    "build:server": "rm -rf prod_server/index.js && webpack --config config/webpack.server.prod.js",
+    "build:server": "rm -rf prod_server/index.js && webpack -p --config config/webpack.server.prod.js",
     "test": "node scripts/test.js --env=jsdom",
     "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
   },

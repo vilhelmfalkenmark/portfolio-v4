@@ -20,6 +20,9 @@ export default (req, res, next) => {
   const context = {};
   const modules = [];
 
+	console.log(req.url);
+	
+
   const app = ReactDOMServer.renderToString(
     <Loadable.Capture report={m => modules.push(m)}>
       <StaticRouter location={req.url} context={context}>
@@ -28,6 +31,8 @@ export default (req, res, next) => {
     </Loadable.Capture>
   );
 
+	// console.log(modules);
+		
   const extraChunks = extractAssets(manifest, modules).map(
     c => `<script type="text/javascript" src="/${c}"></script>`
   );

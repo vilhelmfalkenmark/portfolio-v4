@@ -22,7 +22,7 @@ module.exports = {
       utils: path.resolve(paths.appSrc, "utils"),
       layout: path.resolve(paths.appSrc, "layout"),
       router: path.resolve(paths.appSrc, "router"),
-      fonts: path.resolve(paths.appSrc, "styles/fonts")
+      fonts: path.resolve(paths.appSrc, "styles/fonts"),
     }
   },
   modules: {
@@ -31,32 +31,33 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-          "babel-inline-import-loader",
-          {
-            loader: "babel-loader",
-            options: {
-              plugins: [
-                "transform-object-rest-spread",
-                ["inline-import"]
-                // [
-                //   "css-modules-transform",
-                //   {
-                //     generateScopedName: "[name]_[local]",
-                //     extensions: [".css"]
-                //   }
-                // ]
-              ],
-              // Make sure cacheDirectory is disabled so that Babel
-              // always rebuilds dependent modules
-              cacheDirectory: false // default
-            }
-          }
+					// "babel-inline-import-loader",
+					"babel-loader"
+          // {
+          //   loader: "babel-loader",
+          //   options: {
+          //     plugins: [
+          //       "transform-object-rest-spread",
+          //       ["inline-import"]
+          //       // [
+          //       //   "css-modules-transform",
+          //       //   {
+          //       //     generateScopedName: "[name]_[local]",
+          //       //     extensions: [".css"]
+          //       //   }
+          //       // ]
+          //     ],
+          //     // Make sure cacheDirectory is disabled so that Babel
+          //     // always rebuilds dependent modules
+          //     cacheDirectory: false // default
+          //   }
+          // }
         ]
       },
-      {
-        test: /\.json$/,
-        use: "json-loader"
-      },
+      // {
+      //   test: /\.json$/,
+      //   use: "json-loader"
+      // },
       { test: /\.css$/, use: "ignore-loader" }
     ]
   },
