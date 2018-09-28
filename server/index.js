@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import path from "path";
 import Loadable from "react-loadable";
 import serverSideRenderer from "./ssr/middleware";
-// import apiHandler from "./api";
+import apiHandler from "./api";
 
 const app = express();
 
@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const router = express.Router();
-
 const PORT = process.env.PORT || 5000;
 
 //////////////////////////////////////////////////
@@ -52,7 +51,7 @@ app.use(
 );
 
 // Api Middleware
-// app.use("/api", apiHandler({ apiKeys }));
+app.use("/api", apiHandler({ apiKeys }));
 
 // Server-side rendering middleware
 app.get("/*", serverSideRenderer);

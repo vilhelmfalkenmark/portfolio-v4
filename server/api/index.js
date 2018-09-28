@@ -1,5 +1,3 @@
-// const express = require("express");
-// const contentful = require("contentful");
 import express from "express";
 const contentful = require("contentful");
 

@@ -5,10 +5,11 @@ const MOVIE_LIST = ["Gudfadern", "Toy story", "Bee Movie"];
 
 const favoriteMovie = view(lensIndex(0), MOVIE_LIST);
 
-const Movies = ({}) => {
+const Movies = (props) => {
   const clicker = () => {
     alert("clicker!");
   };
+	console.log(props);
 
   return (
     <div>

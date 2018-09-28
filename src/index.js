@@ -7,17 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import store from "./store";
 
-// hydrate(
-//   <Provider store={store}>
-//     <BrowserRouter>
-//       <Root />
-//     </BrowserRouter>
-//   </Provider>,
-//   document.getElementById("root")
-// );
-
 window.onload = () => {
-  Loadable.preloadReady().then(() => {
+  Loadable.preloadReady().then(() => {		
     hydrate(
       <Provider store={store}>
         <BrowserRouter>

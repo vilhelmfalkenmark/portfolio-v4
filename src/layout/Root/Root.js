@@ -7,9 +7,7 @@ import {
   NavLink
 } from "react-router-dom";
 
-import Loadable from "react-loadable";
-
-// import routes from "router/routes";
+import routes from "router/routes";
 // import Header from "layout/Header";
 // import Footer from "layout/Footer";
 // import NotFound from "entrypoints/NotFound";
@@ -37,68 +35,19 @@ const s = classNames.bind(styles);
 
 // const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
-function Loading() {
-  return <div>
-	<h1>LADDAR</h1>
-	<h1>LADDAR</h1>
-	<h1>LADDAR</h1>
-	<h1>LADDAR</h1>
-	<h1>LADDAR</h1>
-	</div>;
-}
-
-const ROUTES = [
-  {
-    path: "/",
-    exact: true,
-    component: Loadable({
-      loader: () =>
-        import(/* webpackChunkName: "HomeEntrypoint" */ "../../entrypoints/Home"),
-      loading: Loading,
-      modules: ["HomeEntrypoint"]
-    }),
-    // component: Home,
-    key: 389972
-  },
-  {
-    path: "/movies",
-    exact: true,
-    // component: Movies,
-    component: Loadable({
-      loader: () =>
-        import(/* webpackChunkName: "MoviesEntrypoint" */ "../../entrypoints/Movies"),
-      loading: Loading,
-      modules: ["MoviesEntrypoint"] // <-- Tells react-loadable that this component requires the chunkfile named MoviesEntrypoint
-    }),
-    key: 35145
-  },
-  {
-    path: "/movies/:movietitle",
-    exact: true,
-    // component: Movies,
-    component: Loadable({
-      loader: () =>
-        import(/* webpackChunkName: "MovieDetailsEntrypoint" */ "../../entrypoints/MovieDetails"),
-      loading: Loading,
-      modules: ["MovieDetailsEntrypoint"]
-    }),
-    key: 4894984
-  }
-];
-
 const Root = () => (
   <div className={s({ content: true })}>
     <ul>
-      <li>
-        <NavLink to="">Hem</NavLink>
-      </li>
-      <li>
-        <NavLink to="/movies">Filmer</NavLink>
-      </li>
+      {routes.map(route => (
+        <li>
+          <NavLink to={route.path}>{route.navTitle}</NavLink>
+        </li>
+      ))}
     </ul>
-    {ROUTES.map(route => (
+    {routes.map(route => (
       <Route
         path={route.path}
+        queryBeforeRender={route.queryBeforeRender}
         component={route.component}
         exact={route.exact}
         key={route.key}

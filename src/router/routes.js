@@ -1,92 +1,78 @@
-import universal from "react-universal-component";
+import React from "react";
+import Loadable from "react-loadable";
 
-// AsyncLoading Higher order component
-import LoadingPlaceholder from "components/LoadingPlaceholder";
+function Loading() {
+  return (
+    <div>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+    </div>
+  );
+}
 
-// Skeleton placeholders for code-splitting loading state
-import FaqSkeleton from "components/Skeletons/FaqSkeleton";
+// const LandingPageEntrypoint = Loadable({
+//   loader: () =>
+//     import(/* webpackChunkName: "LandingPageEntrypoint" */ "../entrypoints/LandingPage"),
+//   loading: Loading,
+//   modules: ["LandingPageEntrypoint"]
+// });
 
-// Hero Placeholder component
-import Hero from "components/Hero";
+// const ProjectsEntrypoint = Loadable({
+//   loader: () =>
+//     import(/* webpackChunkName: "ProjectsEntrypoint" */ "../entrypoints/Projects"),
+//   loading: Loading,
+//   modules: ["ProjectsEntrypoint"]
+// });
 
-// Svg icons for Navbar
-import home from "assets/svg/home.svg";
-import guestList from "assets/svg/guest-list.svg";
-import faq from "assets/svg/faq.svg";
+// NOTE TEST
+const HomeEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "HomeEntrypoint" */ "../entrypoints/Home"),
+  loading: Loading,
+  modules: ["HomeEntrypoint"]
+});
 
-//////////////////////////////////////////////////
-/**
- * CODE SPLITTING CHUNKS
- */
-//////////////////////////////////////////////////
-const LandingPage = universal(
-  () => import(/* webpackChunkName: 'landingpage' */ "entrypoints/LandingPage"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/LandingPage"),
-    chunkName: "landingpage",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: Hero,
-      withRibbonHeading: false
-    })
-  }
-);
-
-// FAQ
-const Faq = universal(
-  () => import(/* webpackChunkName: 'faq' */ "entrypoints/Faq"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/Faq"),
-    chunkName: "faq",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: FaqSkeleton,
-      withRibbonHeading: true
-    })
-  }
-);
-
-//  Projects
-const Projects = universal(
-  () => import(/* webpackChunkName: 'rsvp' */ "entrypoints/Projects"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/Projects"),
-    chunkName: "projects",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: FaqSkeleton,
-      withRibbonHeading: true
-    })
-  }
-);
+const MoviesEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "MoviesEntrypoint" */ "../entrypoints/Movies"),
+  loading: Loading,
+  modules: ["MoviesEntrypoint"]
+});
 
 //////////////////////////////////////////////////
 /**
  * Routes base
  */
 //////////////////////////////////////////////////
+// export const LANDING_ROUTE = {
+//   exact: true,
+//   navTitle: "Hem",
+//   slug: "/",
+//   component: LandingPageEntrypoint
+// };
+
+// export const PROJECTS_ROUTE = {
+//   exact: false,
+//   navTitle: "Projekt",
+//   slug: "/projekt/",
+//   component: ProjectsEntrypoint
+// };
+
 export const HOME_ROUTE = {
   exact: true,
   navTitle: "Hem",
-  slug: "/",
-  icon: home,
-  largeIcon: false,
-  component: LandingPage
+  path: "/",
+  component: HomeEntrypoint
 };
 
-export const PROJECTS_ROUTE = {
-  exact: false,
-  navTitle: "Projekt",
-  slug: "/projekt/",
-  icon: guestList,
-  largeIcon: false,
-  component: Projects
+export const MOVIES_ROUTE = {
+  exact: true,
+  navTitle: "Filmer",
+  path: "/filmer/",
+  component: MoviesEntrypoint
 };
 
-export const FAQ_ROUTE = {
-  exact: false,
-  navTitle: "Frågor och svar",
-  slug: "/fragor-och-svar/",
-  icon: faq,
-  largeIcon: true,
-  component: Faq
-};
-
-export default [HOME_ROUTE, PROJECTS_ROUTE, FAQ_ROUTE];
+export default [HOME_ROUTE, MOVIES_ROUTE];
