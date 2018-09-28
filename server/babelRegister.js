@@ -19,13 +19,14 @@ require("babel-register")({
       {
         root: ["../src"],
         alias: {
-          actions: "./src/actions",
+          store: "./src/store",
           components: "./src/components",
           reducers: "./src/reducers",
           utils: "./src/utils",
           layout: "./src/layout",
           styles: "./src/styles",
           entrypoints: "./src/entrypoints",
+          router: "./src/router",
           build: "./build"
         }
       }

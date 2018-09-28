@@ -12,7 +12,7 @@ export function fetchProjects() {
   return function(dispatch) {
     dispatch({ type: PROJECTS_FETCHING });
     axios
-      .get(`${apiBase}/projects/`)
+      .get(`${apiBase}/projects`)
       .then(response => {
         dispatch({ type: PROJECTS_FULFILLED, payload: response.data });
       })

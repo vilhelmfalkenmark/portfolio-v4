@@ -4,7 +4,6 @@ const contentful = require("contentful");
 const router = express.Router();
 
 export default ({ apiKeys }) => {
-	
   const contentfulClient = contentful.createClient({
     space: apiKeys.CONTENTFUL_SPACE,
     accessToken: apiKeys.CONTENTFUL_ACCESS_TOKEN

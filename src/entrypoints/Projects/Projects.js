@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
+import classNames from "classnames/bind";
 import { fetchProjects } from "store/projects/actions";
-
 import Project from "components/Lists/Project";
+import styles from "./Projects.css";
 
-import WithStyles from "layout/WithStyles";
-
-import s from "./Projects.css";
+const s = classNames.bind(styles);
 
 class Projects extends Component {
   componentDidMount() {
@@ -47,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WithStyles(Projects, s));
+)(Projects);
