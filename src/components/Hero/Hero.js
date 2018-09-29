@@ -1,25 +1,17 @@
 import React from "react";
 import ScrollDown from "components/ScrollDown";
-import Particles from "react-particles-js";
+// import Particles from "react-particles-js";
+import classNames from "classnames/bind";
 
-// import image from "assets/images/hero.jpg";
-import WithStyles from "layout/WithStyles";
+import styles from "./Hero.css";
 
-import s from "./Hero.css";
+const s = classNames.bind(styles);
 
-const Hero = ({
-  infoFulfilled,
-  // imageUrl,
-  scrollToContent = () => null
-  // title = `Vi gifter oss ${copy.weddingDate}!`
-}) => {
+const Hero = ({ infoFulfilled, scrollToContent = () => null }) => {
   return (
-    <section
-      className={s({ container: true })}
-      // style={{ backgroundImage: `url(${image})` }}
-    >
+    <section className={s({ container: true })}>
       {/* <h1 className={s({ title: true })}>{title}</h1> */}
-      <Particles
+      {/* <Particles
         params={{
           particles: {
             line_linked: {
@@ -39,7 +31,7 @@ const Hero = ({
           top: 0,
           left: 0
         }}
-      />
+      /> */}
       <figure className={s({ scroller: true })}>
         {infoFulfilled && <ScrollDown onClickCallback={scrollToContent} />}
       </figure>
@@ -47,4 +39,4 @@ const Hero = ({
   );
 };
 
-export default WithStyles(Hero, s);
+export default Hero;

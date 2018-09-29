@@ -3,7 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
 import Loadable from "react-loadable";
-import serverSideRenderer from "./ssr/middleware";
+import ssrHandler from "./ssr/middleware";
 import apiHandler from "./api";
 
 const app = express();
@@ -52,8 +52,9 @@ app.use(
 // Api Middleware
 app.use("/api", apiHandler({ apiKeys }));
 
-// Server-side rendering middleware
-app.get("/*", serverSideRenderer);
+// Server-side rendering
+// app.use(ssrHandler);
+app.get("/*", ssrHandler);
 
 /**
  * Next, our server app will need to load all modules before rendering,

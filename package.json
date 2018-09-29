@@ -98,7 +98,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node prod_server/index.js",
+    "start": "NODE_ENV=production node prod_server/index.js",
     "start:client": "NODE_ENV=development node scripts/start.js",
     "start:server": "NODE_ENV=development nodemon server/babelRegister.js",
     "build": "npm run build:server && npm run build:client",

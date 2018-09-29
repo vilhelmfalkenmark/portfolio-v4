@@ -13,12 +13,12 @@ function Loading() {
   );
 }
 
-// const LandingPageEntrypoint = Loadable({
-//   loader: () =>
-//     import(/* webpackChunkName: "LandingPageEntrypoint" */ "../entrypoints/LandingPage"),
-//   loading: Loading,
-//   modules: ["LandingPageEntrypoint"]
-// });
+const LandingPageEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "LandingPageEntrypoint" */ "../entrypoints/LandingPage"),
+  loading: Loading,
+  modules: ["LandingPageEntrypoint"]
+});
 
 const ProjectsEntrypoint = Loadable({
   loader: () =>
@@ -27,52 +27,25 @@ const ProjectsEntrypoint = Loadable({
   modules: ["ProjectsEntrypoint"]
 });
 
-// NOTE TEST
-const HomeEntrypoint = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "HomeEntrypoint" */ "../entrypoints/Home"),
-  loading: Loading,
-  modules: ["HomeEntrypoint"]
-});
-
-const MoviesEntrypoint = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "MoviesEntrypoint" */ "../entrypoints/Movies"),
-  loading: Loading,
-  modules: ["MoviesEntrypoint"]
-});
-
 //////////////////////////////////////////////////
 /**
  * Routes base
  */
 //////////////////////////////////////////////////
-// export const LANDING_ROUTE = {
-//   exact: true,
-//   navTitle: "Hem",
-//   path: "/",
-//   component: LandingPageEntrypoint
-// };
+export const LANDING_ROUTE = {
+  exact: true,
+  navTitle: "Hem",
+  path: "/",
+  component: LandingPageEntrypoint,
+  key: 218
+};
 
 export const PROJECTS_ROUTE = {
   exact: false,
   navTitle: "Projekt",
   path: "/projekt/",
-  component: ProjectsEntrypoint
+  component: ProjectsEntrypoint,
+  key: 219
 };
 
-export const HOME_ROUTE = {
-  exact: true,
-  navTitle: "Hem",
-  path: "/",
-  component: HomeEntrypoint
-};
-
-export const MOVIES_ROUTE = {
-  exact: true,
-  navTitle: "Filmer",
-  path: "/filmer/",
-  component: MoviesEntrypoint
-};
-
-export default [HOME_ROUTE, MOVIES_ROUTE, PROJECTS_ROUTE];
+export default [LANDING_ROUTE, PROJECTS_ROUTE];

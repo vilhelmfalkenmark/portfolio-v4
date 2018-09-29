@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Route, withRouter, NavLink } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 
 import routes from "router/routes";
-// import Header from "layout/Header";
+import Header from "layout/Header";
 // import Footer from "layout/Footer";
 // import NotFound from "entrypoints/NotFound";
-// import WithStyles from "layout/WithStyles";
 
 import classNames from "classnames/bind";
 import styles from "./Root.css";
@@ -28,13 +27,7 @@ const ScrollToTopWithRouter = withRouter(ScrollToTop);
 const Root = () => (
   <ScrollToTopWithRouter>
     <div className={s({ content: true })}>
-      <ul>
-        {routes.map(route => (
-          <li>
-            <NavLink to={route.path}>{route.navTitle}</NavLink>
-          </li>
-        ))}
-      </ul>
+      <Header />
       {routes.map(route => (
         <Route
           path={route.path}
@@ -43,6 +36,7 @@ const Root = () => (
           key={route.key}
         />
       ))}
+      {/* <Footer /> */}
     </div>
   </ScrollToTopWithRouter>
 );

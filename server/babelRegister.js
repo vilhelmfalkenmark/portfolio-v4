@@ -21,13 +21,13 @@ require("babel-register")({
         alias: {
           store: "./src/store",
           components: "./src/components",
-          reducers: "./src/reducers",
           utils: "./src/utils",
           layout: "./src/layout",
           styles: "./src/styles",
           entrypoints: "./src/entrypoints",
           router: "./src/router",
-          build: "./build"
+          build: "./build",
+          assets: "./src/assets"
         }
       }
     ],

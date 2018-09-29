@@ -13,20 +13,30 @@ class Projects extends Component {
     this.props.fetchProjects();
   }
 
-  render() {
+  getMarkup() {
     const { projects } = this.props;
 
+    if (projects.fulfilled && projects.data.length) {
+      return (
+        <ul className={s({ list: true })}>
+          {projects.data.map((project, index) => (
+            <Project key={index} project={project} />
+          ))}
+        </ul>
+      );
+    } else if (projects.fetching) {
+      return <p>Laddar!</p>;
+    }
+
+    return <p>Error!</p>;
+  }
+
+  render() {
     return (
       <DocumentTitle title={"Projekt"}>
         <main className={s({ container: true })}>
           <h4>Projekt!</h4>
-          {projects.fulfilled && (
-            <ul className={s({ list: true })}>
-              {projects.data.map((project, index) => (
-                <Project key={index} project={project} />
-              ))}
-            </ul>
-          )}
+          {this.getMarkup()}
         </main>
       </DocumentTitle>
     );

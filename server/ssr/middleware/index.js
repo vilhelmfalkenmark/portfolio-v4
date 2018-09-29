@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import Loadable from "react-loadable";
+import store from "store";
 
 import Root from "layout/Root";
 
@@ -16,20 +18,27 @@ const extractAssets = (assets, chunks) =>
     .filter(asset => chunks.indexOf(asset.replace(".js", "")) > -1)
     .map(k => assets[k]);
 
-export default (req, res, next) => {
+export default (req, res) => {
+  // export default store => (req, res) => {
+  // res.send("hejsan!");
+
+  // console.log("kallas på!", store);
+
   const context = {};
   const modules = [];
-	
+
   const app = ReactDOMServer.renderToString(
     <Loadable.Capture report={m => modules.push(m)}>
-      <StaticRouter location={req.url} context={context}>
-        <Root />
-      </StaticRouter>
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          <Root />
+        </StaticRouter>
+      </Provider>
     </Loadable.Capture>
   );
 
-	console.log(modules);
-		
+  console.log(modules);
+
   const extraChunks = extractAssets(manifest, modules).map(
     c => `<script type="text/javascript" src="/${c}"></script>`
   );

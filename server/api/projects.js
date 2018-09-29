@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const promiseResolve = data =>
-  console.log(data) ||
   new Promise((resolve, reject) => {
     resolve(data);
     reject(err => {

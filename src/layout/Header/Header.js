@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
-import routes, { HOME_ROUTE } from "router/routes";
-import SVG from "components/SVG";
-import WithStyles from "layout/WithStyles";
+import routes, { LANDING_ROUTE } from "router/routes";
+import classNames from "classnames/bind";
 
-import s from "./Header.css";
+import styles from "./Header.css";
+
+const s = classNames.bind(styles);
 
 const Header = ({ location }) => (
   <header className={s({ header: true })} name="header">
@@ -15,33 +16,26 @@ const Header = ({ location }) => (
       })}
     >
       <div className={s({ inner: true })}>
-        <NavLink to={HOME_ROUTE.slug} className={s({ logoLink: true })} />
+        <NavLink to={LANDING_ROUTE.path} className={s({ logoLink: true })} />
         <nav className={s({ navigation: true })}>
           <ul className={s({ list: true })}>
             {routes.map((route, index) => (
               <li
                 className={s({
                   item: true,
-                  item_isActive: route.slug === location.pathname
+                  item_isActive: route.path === location.pathname
                 })}
                 key={index}
               >
                 <NavLink
                   exact
-                  to={route.slug}
+                  to={route.path}
                   className={s({ link: true })}
                   activeClassName={s({ link_isActive: true })}
                 >
-                  <SVG
-                    svg={route.icon}
-                    className={s({
-                      icon: true,
-                      icon_isSmall: !route.largeIcon,
-                      icon_isLarge: route.largeIcon,
-                      icon_isActive: route.slug === location.pathname
-                    })}
-                  />
-                  <span className={s.linkTitle}>{route.navTitle}</span>
+                  <span className={s({ linkTitle: true })}>
+                    {route.navTitle}
+                  </span>
                 </NavLink>
               </li>
             ))}
@@ -52,4 +46,4 @@ const Header = ({ location }) => (
   </header>
 );
 
-export default withRouter(WithStyles(Header, s));
+export default withRouter(Header);
