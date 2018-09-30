@@ -24,8 +24,6 @@ module.exports = contentful => {
         });
       promiseResolve(projects)
         .then(data => {
-          console.log(data);
-
           response.json({
             data
           });

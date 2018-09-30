@@ -21,17 +21,3 @@ export function fetchProjects() {
       });
   };
 }
-
-// export function fetchGuest(guestId) {
-//   return function(dispatch) {
-//     dispatch({ type: GUEST_FETCHING });
-//     axios
-//       .get(`${apiBase}/guests/${guestId}`)
-//       .then(response => {
-//         dispatch({ type: GUEST_FETCHED, payload: response.data });
-//       })
-//       .catch(err => {
-//         dispatch({ type: GUEST_FETCHING_ERROR, payload: err });
-//       });
-//   };
-// }

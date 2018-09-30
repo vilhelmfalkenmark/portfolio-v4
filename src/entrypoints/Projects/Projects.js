@@ -10,13 +10,17 @@ const s = classNames.bind(styles);
 
 class Projects extends Component {
   componentDidMount() {
-    this.props.fetchProjects();
+    const { projects } = this.props;
+
+    if (!projects.fulfilled) {
+      this.props.fetchProjects();
+    }
   }
 
   getMarkup() {
     const { projects } = this.props;
 
-    if (projects.fulfilled && projects.data.length) {
+    if (projects.fulfilled && projects.data.length > 0) {
       return (
         <ul className={s({ list: true })}>
           {projects.data.map((project, index) => (
