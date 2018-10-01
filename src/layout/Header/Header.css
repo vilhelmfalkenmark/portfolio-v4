@@ -116,30 +116,14 @@
   color: var(--text-grey);
   position: relative;
 
-  &_isActive {
-    color: var(--link-color);
-  }
-
   @media (--viewport-min-960) {
     flex-direction: row;
     justify-content: center;
   }
+}
 
-  /* &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    height: 4px;
-    background: var(--link-color);
-    visibility: hidden;
-  }
-
-  &:hover {
-    &:after {
-      visibility: visible;
-    }
-  } */
+.isActive {
+  color: var(--link-color);
 }
 
 .linkTitle {

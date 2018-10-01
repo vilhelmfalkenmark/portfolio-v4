@@ -31,7 +31,7 @@ const Header = ({ location }) => (
                   exact
                   to={route.path}
                   className={s({ link: true })}
-                  activeClassName={s({ link_isActive: true })}
+                  activeClassName={s({ isActive: true })}
                 >
                   <span className={s({ linkTitle: true })}>
                     {route.navTitle}
