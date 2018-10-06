@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "paths": {
+      "store/*": ["src/store/*"],
+      "components/*": ["src/components/*"],
+      "reducers/*": ["src/reducers/*"],
+      "utils/*": ["src/utils/*"]
+    },
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

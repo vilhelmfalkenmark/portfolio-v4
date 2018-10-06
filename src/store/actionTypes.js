@@ -13,6 +13,13 @@ export const PROJECTS_FULFILLED = "PROJECTS_FULFILLED";
 export const PROJECTS_REJECTED = "PROJECTS_REJECTED";
 
 //////////////////////////////////////////
+// EXPERIENCES
+//////////////////////////////////////////
+export const EXPERIENCES_FETCHING = "EXPERIENCES_FETCHING";
+export const EXPERIENCES_FULFILLED = "EXPERIENCES_FULFILLED";
+export const EXPERIENCES_REJECTED = "EXPERIENCES_REJECTED";
+
+//////////////////////////////////////////
 // INSTAGRAM
 //////////////////////////////////////////
 export const INSTAGRAM_FULFILLED = "INSTAGRAM_FULFILLED";

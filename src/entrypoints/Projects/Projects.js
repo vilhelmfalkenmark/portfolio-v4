@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
 import classNames from "classnames/bind";
-import { fetchProjects } from "store/projects/actions";
+import { clientSideFetchProjects } from "store/projects/actions";
 import Project from "components/Lists/Project";
 import styles from "./Projects.css";
 
@@ -13,7 +13,7 @@ class Projects extends Component {
     const { projects } = this.props;
 
     if (!projects.fulfilled) {
-      this.props.fetchProjects();
+      this.props.clientSideFetchProjects();
     }
   }
 
@@ -52,8 +52,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProjects: () => {
-    dispatch(fetchProjects());
+  clientSideFetchProjects: () => {
+    dispatch(clientSideFetchProjects());
   }
 });
 

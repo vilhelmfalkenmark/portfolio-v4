@@ -10,8 +10,6 @@ import configureStore from "store";
 
 const store = configureStore(window.CLIENT_REDUX_STATE || {});
 
-console.log(window.CLIENT_REDUX_STATE, " <-- window.__REDUX_STATE__");
-
 window.onload = () => {
   Loadable.preloadReady().then(() => {
     hydrate(

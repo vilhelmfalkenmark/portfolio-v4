@@ -3,14 +3,11 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Loadable from "react-loadable";
-// import configureStore from "store";
 
 import Root from "layout/Root";
 
 // Client side build manifest
 import manifest from "build/asset-manifest.json";
-
-// const store = configureStore();
 
 const path = require("path");
 const fs = require("fs");

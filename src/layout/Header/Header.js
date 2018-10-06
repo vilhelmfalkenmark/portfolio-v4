@@ -22,8 +22,8 @@ const Header = ({ location }) => (
             {routes.map((route, index) => (
               <li
                 className={s({
-                  item: true,
-                  item_isActive: route.path === location.pathname
+                  item: true
+                  // item_isActive: route.path === location.pathname
                 })}
                 key={index}
               >

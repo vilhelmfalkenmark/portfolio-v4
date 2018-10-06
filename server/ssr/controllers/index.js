@@ -1,26 +1,29 @@
 import express from "express";
 import middleware from "../middleware";
 import configureStore from "store";
-import axios from "axios";
-import { apiBase } from "utils/constants/environmentVariables";
-
-import { PROJECTS_FULFILLED, PROJECTS_REJECTED } from "store/actionTypes";
+import clientRoutes from "router/routes";
+import promiseResolve from "utils/helpers/promises";
 
 const router = express.Router();
 
-const actionIndex = (req, res, next) => {
-  console.log(req.url, " <--req.url");
+const fetchEntryPointContent = ({ store, req, res, next }) => {
+  let i;
+  for (i = 0; i < clientRoutes.length; i += 1) {
+    if (req.url === clientRoutes[i].path) {
+      return promiseResolve(clientRoutes[i].ssrContentRequest(store))
+        .then(storeWithContent => {
+          middleware(storeWithContent)(req, res, next);
+        })
+        .catch(err => {
+          middleware(store)(req, res, next);
+        });
+    }
+  }
+  return middleware(store)(req, res, next);
+};
 
-  const store = configureStore();
-  axios
-    .get(`${apiBase}/projects`)
-    .then(({ data }) => {
-      store.dispatch({ type: PROJECTS_FULFILLED, payload: data });
-      middleware(store)(req, res, next);
-    })
-    .catch(err => {
-      store.dispatch({ type: PROJECTS_REJECTED, payload: err });
-    });
+const actionIndex = (req, res, next) => {
+  fetchEntryPointContent({ store: configureStore(), req, res, next });
 };
 
 router.get("*", actionIndex);

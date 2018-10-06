@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
 // import GoogleMaps from "components/GoogleMaps";
 import Hero from "components/Hero";
-import { fetchLandingPage } from "store/landingPage/actions";
+import { clientSideFetchLandingPage } from "store/landingPage/actions";
 import Scroll from "react-scroll";
 
 import classNames from "classnames/bind";
@@ -14,7 +14,7 @@ const s = classNames.bind(styles);
 
 class LandingPage extends Component {
   componentWillMount() {
-    this.props.fetchLandingPage();
+    this.props.clientSideFetchLandingPage();
   }
 
   scrollToContent() {
@@ -58,8 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchLandingPage: () => {
-    dispatch(fetchLandingPage());
+  clientSideFetchLandingPage: () => {
+    dispatch(clientSideFetchLandingPage());
   }
 });
 export default connect(

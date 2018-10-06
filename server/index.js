@@ -1,4 +1,3 @@
-import { view, lensPath } from "ramda";
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
@@ -13,29 +12,10 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
-//////////////////////////////////////////////////
-/**
- * ENVIROMENT
- */
-//////////////////////////////////////////////////
-require("dotenv").config(); // <-- Environment variables from webpack-env library
-
-const apiKeys = {
-  INSTAGRAM_ACCESS_TOKEN: view(
-    lensPath(["INSTAGRAM_ACCESS_TOKEN"]),
-    process.env
-  ),
-  CONTENTFUL_SPACE: view(lensPath(["CONTENTFUL_SPACE"]), process.env),
-  CONTENTFUL_ACCESS_TOKEN: view(
-    lensPath(["CONTENTFUL_ACCESS_TOKEN"]),
-    process.env
-  )
-};
-
 // Handle CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,PATCH");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type,application/json, Accept"
@@ -50,7 +30,7 @@ app.use(
 );
 
 // Api Middleware
-app.use("/api", apiHandler({ apiKeys }));
+app.use("/api", apiHandler());
 
 // Server-side rendering
 app.use(ssrHandler);
