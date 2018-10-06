@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
-import GoogleMaps from "components/GoogleMaps";
+// import GoogleMaps from "components/GoogleMaps";
 import Hero from "components/Hero";
-import { fetchLandingPage } from "store/landingPage/actions";
+import { clientSideFetchLandingPage } from "store/landingPage/actions";
 import Scroll from "react-scroll";
-import WithStyles from "layout/WithStyles";
 
-import s from "./LandingPage.css";
+import classNames from "classnames/bind";
+
+import styles from "./LandingPage.css";
+
+const s = classNames.bind(styles);
 
 class LandingPage extends Component {
   componentWillMount() {
-    this.props.fetchLandingPage();
+    this.props.clientSideFetchLandingPage();
   }
 
   scrollToContent() {
@@ -36,13 +39,13 @@ class LandingPage extends Component {
             <p>Content</p>
           </section>
           <section className={s({ mapWrapper: true })}>
-            <GoogleMaps
+            {/* <GoogleMaps
               isMarkerShown
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2vvL4RqLyLTIwBZ0xiIHXdvEiz7h_PJA&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `600px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
-            />
+            /> */}
           </section>
         </main>
       </DocumentTitle>
@@ -55,11 +58,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchLandingPage: () => {
-    dispatch(fetchLandingPage());
+  clientSideFetchLandingPage: () => {
+    dispatch(clientSideFetchLandingPage());
   }
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WithStyles(LandingPage, s));
+)(LandingPage);

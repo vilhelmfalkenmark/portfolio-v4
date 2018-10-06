@@ -1,19 +1,24 @@
 import React from "react";
-import { render } from "react-dom";
-import Root from "layout/Root";
-import registerServiceWorker from "./registerServiceWorker";
+import { hydrate } from "react-dom";
 import { Provider } from "react-redux";
-import store from "./store";
-import { onInsertStylesHandler } from "layout/WithStyles";
-import WithStylesContext from "layout/WithStylesContext";
+import Loadable from "react-loadable";
+import { BrowserRouter } from "react-router-dom";
 
+import Root from "layout/Root";
 
-render(
-  <WithStylesContext onInsertCss={onInsertStylesHandler}>
-    <Provider store={store}>
-      <Root />
-    </Provider>
-  </WithStylesContext>,
-  document.getElementById("root")
-);
-registerServiceWorker();
+import configureStore from "store";
+
+const store = configureStore(window.CLIENT_REDUX_STATE || {});
+
+window.onload = () => {
+  Loadable.preloadReady().then(() => {
+    hydrate(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Root />
+        </BrowserRouter>
+      </Provider>,
+      document.getElementById("root")
+    );
+  });
+};

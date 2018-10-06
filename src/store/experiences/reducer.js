@@ -1,7 +1,7 @@
 import {
-  PROJECTS_FETCHING,
-  PROJECTS_FULFILLED,
-  PROJECTS_REJECTED
+  EXPERIENCES_FETCHING,
+  EXPERIENCES_FULFILLED,
+  EXPERIENCES_REJECTED
 } from "store/actionTypes";
 
 const iS = {
@@ -11,19 +11,19 @@ const iS = {
   data: []
 };
 
-const projects = (state = iS, action) => {
+const experiences = (state = iS, action) => {
   switch (action.type) {
-    case PROJECTS_FETCHING: {
+    case EXPERIENCES_FETCHING: {
       return Object.assign({}, state, { fetching: true });
     }
-    case PROJECTS_FULFILLED: {
+    case EXPERIENCES_FULFILLED: {
       return Object.assign({}, state, {
         fulfilled: true,
         fetching: false,
         data: action.payload
       });
     }
-    case PROJECTS_REJECTED: {
+    case EXPERIENCES_REJECTED: {
       return Object.assign({}, state, {
         fulfilled: false,
         fetching: false,
@@ -35,4 +35,4 @@ const projects = (state = iS, action) => {
   }
 };
 
-export default projects;
+export default experiences;

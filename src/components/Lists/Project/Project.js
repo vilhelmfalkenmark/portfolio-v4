@@ -2,9 +2,10 @@ import React from "react";
 
 import { pluckImageUrl } from "utils/selectors/projects";
 
-import WithStyles from "layout/WithStyles";
+import classNames from "classnames/bind";
+import styles from "./Project.css";
 
-import s from "./Project.css";
+const s = classNames.bind(styles);
 
 const Project = ({ project }) => {
   const imageUrl = pluckImageUrl(project.image);
@@ -23,4 +24,4 @@ const Project = ({ project }) => {
   );
 };
 
-export default WithStyles(Project, s);
+export default Project;

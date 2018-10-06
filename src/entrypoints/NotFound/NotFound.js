@@ -1,26 +1,25 @@
 import React from "react";
 import DocumentTitle from "react-document-title";
-import copy from "utils/copy";
-import Hero from "components/Hero";
+import classNames from "classnames/bind";
 
-import WithStyles from "layout/WithStyles";
+import styles from "./NotFound.css";
 
-import s from "./NotFound.css";
+const s = classNames.bind(styles);
 
 const NotFound = () => {
   return (
     <DocumentTitle title={"Sidan kunde inte hittas"}>
       <main className={s({ container: true })}>
-        <Hero
-          title={`Sidan kunde hittas men vi gifter oss som sagt ${
-            copy.weddingDate
-          }`}
-          notFound
-          infoFulfilled={false}
-        />
+        <h1>404!</h1>
+        <h1>404!</h1>
+        <h1>404!</h1>
+        <h1>404!</h1>
+        <h1>404!</h1>
+        <h1>404!</h1>
+        <h1>404!</h1>
       </main>
     </DocumentTitle>
   );
 };
 
-export default WithStyles(NotFound, s);
+export default NotFound;

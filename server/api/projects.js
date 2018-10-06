@@ -29,6 +29,8 @@ module.exports = contentful => {
           });
         })
         .catch(e => {
+          console.error(e);
+
           response.json({
             data: "Error när info skulle hämtas"
           });

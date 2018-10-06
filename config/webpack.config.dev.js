@@ -88,8 +88,6 @@ module.exports = {
     // for React Native Web.
     extensions: [".web.js", ".js", ".json", ".web.jsx", ".jsx"],
     alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       actions: path.resolve(paths.appSrc, "actions"),
       assets: path.resolve(paths.appSrc, "assets"),
       reducers: path.resolve(paths.appSrc, "reducers"),
@@ -169,17 +167,14 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              require.resolve("classnames-loader"),
-              require.resolve("isomorphic-style-loader"),
+              require.resolve("style-loader"),
               {
                 loader: require.resolve("css-loader"),
                 options: {
                   importLoaders: 1,
                   // CSS Modules https://github.com/css-modules/css-modules
                   modules: true,
-                  localIdentName: true
-                    ? "[name]_[local]_[hash:base64:3]"
-                    : "[hash:base64:4]"
+                  localIdentName: "[name]_[local]"
                 }
               },
               {

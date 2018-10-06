@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  withRouter
-} from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
+
 import routes from "router/routes";
 import Header from "layout/Header";
-import Footer from "layout/Footer";
 import NotFound from "entrypoints/NotFound";
-import WithStyles from "layout/WithStyles";
 
-import s from "./Root.css";
+import classNames from "classnames/bind";
+import styles from "./Root.css";
+
+const s = classNames.bind(styles);
 
 class ScrollToTop extends Component {
   componentDidUpdate(prevProps) {
@@ -19,7 +16,6 @@ class ScrollToTop extends Component {
       window.scrollTo(0, 0);
     }
   }
-
   render() {
     return this.props.children;
   }
@@ -28,26 +24,36 @@ class ScrollToTop extends Component {
 const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
 const Root = () => (
-  <Router>
-    <ScrollToTopWithRouter>
-      <div className={s({ content: true })}>
-        <Header />
-        <Switch>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              exact={route.exact}
-              path={route.slug}
-              component={route.component}
-            />
-          ))}
-          {/* 404 */}
-          <Route path="*" component={NotFound} />
-        </Switch>
-        <Footer />
-      </div>
-    </ScrollToTopWithRouter>
-  </Router>
+  <ScrollToTopWithRouter>
+    <div className={s({ content: true })}>
+      <Header />
+      <Switch>
+        {routes.map(route => (
+          <Route
+            path={route.path}
+            component={route.component}
+            exact={route.exact}
+            key={route.key}
+          />
+        ))}
+        <Route path="*" component={NotFound} />
+      </Switch>
+
+      {/* <Footer /> */}
+    </div>
+  </ScrollToTopWithRouter>
 );
 
-export default WithStyles(Root, s);
+export default Root;
+// <Switch>
+//   {routes.map((route, index) => (
+//     <Route
+//       key={index}
+//       exact={route.exact}
+//       path={route.slug}
+//       component={route.component}
+//     />
+//   ))}
+//   {/* 404 */}
+//   <Route path="*" component={NotFound} />
+// </Switch>;

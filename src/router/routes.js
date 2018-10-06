@@ -1,92 +1,85 @@
-import universal from "react-universal-component";
+import React from "react";
+import Loadable from "react-loadable";
+import { serverSideFetchExperiences } from "store/experiences/actions";
+import { serverSideFetchProjects } from "store/projects/actions";
+import { serverSideFetchLandingPage } from "store/landingPage/actions";
 
-// AsyncLoading Higher order component
-import LoadingPlaceholder from "components/LoadingPlaceholder";
+function Loading() {
+  return (
+    <div>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+      <h1>LADDAR</h1>
+    </div>
+  );
+}
 
-// Skeleton placeholders for code-splitting loading state
-import FaqSkeleton from "components/Skeletons/FaqSkeleton";
+const LandingPageEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "LandingPageEntrypoint" */ "../entrypoints/LandingPage"),
+  loading: Loading,
+  modules: ["LandingPageEntrypoint"]
+});
 
-// Hero Placeholder component
-import Hero from "components/Hero";
+const ProjectsEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "ProjectsEntrypoint" */ "../entrypoints/Projects"),
+  loading: Loading,
+  modules: ["ProjectsEntrypoint"]
+});
 
-// Svg icons for Navbar
-import home from "assets/svg/home.svg";
-import guestList from "assets/svg/guest-list.svg";
-import faq from "assets/svg/faq.svg";
-
-//////////////////////////////////////////////////
-/**
- * CODE SPLITTING CHUNKS
- */
-//////////////////////////////////////////////////
-const LandingPage = universal(
-  () => import(/* webpackChunkName: 'landingpage' */ "entrypoints/LandingPage"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/LandingPage"),
-    chunkName: "landingpage",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: Hero,
-      withRibbonHeading: false
-    })
-  }
-);
-
-// FAQ
-const Faq = universal(
-  () => import(/* webpackChunkName: 'faq' */ "entrypoints/Faq"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/Faq"),
-    chunkName: "faq",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: FaqSkeleton,
-      withRibbonHeading: true
-    })
-  }
-);
-
-//  Projects
-const Projects = universal(
-  () => import(/* webpackChunkName: 'rsvp' */ "entrypoints/Projects"),
-  {
-    resolve: () => require.resolveWeak("entrypoints/Projects"),
-    chunkName: "projects",
-    loading: LoadingPlaceholder({
-      SkeletonPlaceholderComponent: FaqSkeleton,
-      withRibbonHeading: true
-    })
-  }
-);
+const ExperiencesEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "ExperiencesEntrypoint" */ "../entrypoints/Experiences"),
+  loading: Loading,
+  modules: ["ExperiencesEntrypoint"]
+});
 
 //////////////////////////////////////////////////
 /**
  * Routes base
  */
 //////////////////////////////////////////////////
-export const HOME_ROUTE = {
+export const LANDING_ROUTE = {
   exact: true,
   navTitle: "Hem",
-  slug: "/",
-  icon: home,
-  largeIcon: false,
-  component: LandingPage
+  path: "/",
+  apiPath: "/landing-page/",
+  component: LandingPageEntrypoint,
+  ssrContentRequest: serverSideFetchLandingPage,
+  key: 218
 };
 
 export const PROJECTS_ROUTE = {
-  exact: false,
+  exact: true,
   navTitle: "Projekt",
-  slug: "/projekt/",
-  icon: guestList,
-  largeIcon: false,
-  component: Projects
+  path: "/projekt/",
+  apiPath: "/projects/",
+  component: ProjectsEntrypoint,
+  ssrContentRequest: serverSideFetchProjects,
+  key: 219
 };
 
-export const FAQ_ROUTE = {
-  exact: false,
-  navTitle: "Frågor och svar",
-  slug: "/fragor-och-svar/",
-  icon: faq,
-  largeIcon: true,
-  component: Faq
+export const EXPERIENCES_ROUTE = {
+  exact: true,
+  navTitle: "Erfarenheter",
+  path: "/erfarenheter/",
+  apiPath: "/experiences/",
+  component: ExperiencesEntrypoint,
+  ssrContentRequest: serverSideFetchExperiences,
+  key: 220
 };
 
-export default [HOME_ROUTE, PROJECTS_ROUTE, FAQ_ROUTE];
+export const NOT_FOUND_ROUTE = {
+  exact: true,
+  navTitle: "Erfarenheter",
+  path: "/erfarenheter/",
+  apiPath: "/experiences/",
+  component: ExperiencesEntrypoint,
+  ssrContentRequest: serverSideFetchExperiences,
+  key: 220
+};
+
+export default [LANDING_ROUTE, PROJECTS_ROUTE, EXPERIENCES_ROUTE];
