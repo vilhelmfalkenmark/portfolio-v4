@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "paths": {
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "store/*": ["src/store/*"],
+      "entrypoints/*": ["src/entrypoints/*"],
+      "router/*": ["src/router/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

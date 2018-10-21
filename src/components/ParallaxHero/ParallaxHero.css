@@ -1,0 +1,28 @@
+.container {
+  height: 500px;
+  width: 100%;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* transform: translateZ(-1px) scale(2); */
+}
+
+.imageContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 0;
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
