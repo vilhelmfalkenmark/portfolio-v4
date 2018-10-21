@@ -1,22 +1,19 @@
-const router = require("express").Router();
+import express from "express";
+import promiseResolve from "utils/helpers/promises";
 
-const promiseResolve = data =>
-  new Promise((resolve, reject) => {
-    resolve(data);
-    reject(err => {
-      throw new Error(err, " error");
-    });
-  });
+const router = express.Router();
 
-module.exports = contentful => {
+export default contentful => {
   router
     .route("/")
     //////////////////////////////////////////
     // GET REQUEST FOR ALL PROJECTS
     //////////////////////////////////////////
-    .get((request, response) => {
+    .get((req, res) => {
       const projects = contentful
-        .getEntries({ content_type: "projects" })
+        .getEntries({
+          content_type: "projects"
+        })
         .then(entry => entry.items.map(item => item.fields))
         .catch(err => {
           console.error(err);
@@ -24,18 +21,53 @@ module.exports = contentful => {
         });
       promiseResolve(projects)
         .then(data => {
-          response.json({
+          res.json({
             data
           });
         })
         .catch(e => {
           console.error(e);
-
-          response.json({
+          res.sendStatus(404);
+          res.json({
             data: "Error när info skulle hämtas"
           });
         });
     });
+  //////////////////////////////////////////
+  // GET req FOR SINGLE PROJECT
+  //////////////////////////////////////////
+  router.route("/:slug").get((req, res) => {
+    const urlWithoutSlash = req.url.replace(/\//g, ""); // /kombispel/ --> kombispel
+    console.log("Slår här!");
+
+    const projects = contentful
+      .getEntries({
+        content_type: "projects"
+      })
+      .then(entry => entry.items.map(item => item.fields))
+      .then(projects =>
+        projects.filter(project => project.slug === urlWithoutSlash).pop()
+      )
+      .catch(err => {
+        console.error(err);
+        return `Kunde inte hämta ${req.url} från contentful`;
+      });
+    promiseResolve(projects)
+      .then(data => {
+        console.log(data, " <-- data");
+
+        res.json({
+          data
+        });
+      })
+      .catch(e => {
+        console.error(e);
+        res.sendStatus(404);
+        res.json({
+          data: "Error när info skulle hämtas"
+        });
+      });
+  });
 
   return router;
 };

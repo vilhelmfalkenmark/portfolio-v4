@@ -3,12 +3,20 @@ import asyncRequest from "utils/network/asyncRequest";
 import {
   PROJECTS_FETCHING,
   PROJECTS_FULFILLED,
-  PROJECTS_REJECTED
+  PROJECTS_REJECTED,
+  PROJECT_DETAILS_FETCHING,
+  PROJECT_DETAILS_FULFILLED,
+  PROJECT_DETAILS_REJECTED
 } from "store/actionTypes";
 
-import { PROJECTS_ROUTE } from "router/routes";
+import { PROJECTS_ROUTE, PROJECT_DETAILS_ROUTE } from "router/routes";
 
-export function clientSideFetchProjects() {
+//////////////////////////////////////////////////
+/**
+ * ALL PROJECTS
+ */
+//////////////////////////////////////////////////
+export const clientSideFetchProjects = () => {
   return function(dispatch) {
     dispatch({ type: PROJECTS_FETCHING });
     asyncRequest
@@ -20,9 +28,9 @@ export function clientSideFetchProjects() {
         dispatch({ type: PROJECTS_REJECTED, payload: err });
       });
   };
-}
+};
 
-export function serverSideFetchProjects(store) {
+export const serverSideFetchProjects = store => {
   return asyncRequest
     .get(PROJECTS_ROUTE.apiPath)
     .then(({ data }) => {
@@ -33,6 +41,33 @@ export function serverSideFetchProjects(store) {
       store.dispatch({ type: PROJECTS_REJECTED, payload: err });
       return store;
     });
-}
+};
+
+//////////////////////////////////////////////////
+/**
+ * SINGLE PROJECT
+ */
+//////////////////////////////////////////////////
+export const clientSideFetchProjectDetails = slug => {
+  console.log(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`);
+
+  return function(dispatch) {
+    dispatch({ type: PROJECT_DETAILS_FETCHING });
+    asyncRequest
+      .get(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`)
+      .then(({ data }) => {
+        dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: data.data });
+      })
+      .catch(err => {
+        dispatch({ type: PROJECT_DETAILS_REJECTED, payload: err });
+      });
+  };
+};
+
+// Project is already present in store
+export const projectDetailsFromStore = project => ({
+  type: PROJECT_DETAILS_FULFILLED,
+  payload: project
+});
 
 export default clientSideFetchProjects;

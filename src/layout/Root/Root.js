@@ -12,7 +12,7 @@ const s = classNames.bind(styles);
 
 class ScrollToTop extends Component {
   componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
     }
   }
@@ -25,8 +25,8 @@ const ScrollToTopWithRouter = withRouter(ScrollToTop);
 
 const Root = () => (
   <ScrollToTopWithRouter>
+    <Header />
     <div className={s({ content: true })}>
-      <Header />
       <Switch>
         {routes.map(route => (
           <Route
@@ -45,15 +45,3 @@ const Root = () => (
 );
 
 export default Root;
-// <Switch>
-//   {routes.map((route, index) => (
-//     <Route
-//       key={index}
-//       exact={route.exact}
-//       path={route.slug}
-//       component={route.component}
-//     />
-//   ))}
-//   {/* 404 */}
-//   <Route path="*" component={NotFound} />
-// </Switch>;

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 import { pluckImageUrl } from "utils/selectors/projects";
 
 import classNames from "classnames/bind";
@@ -20,6 +20,7 @@ const Project = ({ project }) => {
         </a>
       )}
       {imageUrl && <img src={imageUrl} alt={project.imageAlt} />}
+      <NavLink to={`${project.slug}/`}>{`Läs mer`}</NavLink>
     </li>
   );
 };

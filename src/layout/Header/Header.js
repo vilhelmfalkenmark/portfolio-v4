@@ -19,26 +19,28 @@ const Header = ({ location }) => (
         <NavLink to={LANDING_ROUTE.path} className={s({ logoLink: true })} />
         <nav className={s({ navigation: true })}>
           <ul className={s({ list: true })}>
-            {routes.map((route, index) => (
-              <li
-                className={s({
-                  item: true
-                  // item_isActive: route.path === location.pathname
-                })}
-                key={index}
-              >
-                <NavLink
-                  exact
-                  to={route.path}
-                  className={s({ link: true })}
-                  activeClassName={s({ isActive: true })}
-                >
-                  <span className={s({ linkTitle: true })}>
-                    {route.navTitle}
-                  </span>
-                </NavLink>
-              </li>
-            ))}
+            {routes.map(
+              (route, index) =>
+                route.navTitle && (
+                  <li
+                    className={s({
+                      item: true
+                    })}
+                    key={index}
+                  >
+                    <NavLink
+                      exact={route.exact}
+                      to={route.path}
+                      className={s({ link: true })}
+                      activeClassName={s({ isActive: true })}
+                    >
+                      <span className={s({ linkTitle: true })}>
+                        {route.navTitle}
+                      </span>
+                    </NavLink>
+                  </li>
+                )
+            )}
           </ul>
         </nav>
       </div>

@@ -1,10 +1,14 @@
 import express from "express";
 import { view, lensPath } from "ramda";
 
+import projects from "./projects";
+import experiences from "./experiences";
+import landingPage from "./landingpage";
+
 const contentful = require("contentful");
 
 const router = express.Router();
-require("dotenv").config(); // <-- Environment variables from webpack-env library
+require("dotenv").config(); // <-- Environment variables .env file
 
 const apiKeys = {
   INSTAGRAM_ACCESS_TOKEN: view(
@@ -27,9 +31,9 @@ export default () => {
   router.get("/", (req, res) => {
     res.json({ message: "Välkommen till mitt Portfolio API" });
   });
-  router.use("/experiences/", require("./experiences")());
-  router.use("/projects/", require("./projects")(contentfulClient));
-  router.use("/landing-page/", require("./landingpage")());
+  router.use("/experiences/", experiences());
+  router.use("/projects/", projects(contentfulClient));
+  router.use("/landing-page/", landingPage());
   // router.use(
   //   "/instagram",
   //   require("./instagram")(apiKeys.INSTAGRAM_ACCESS_TOKEN)

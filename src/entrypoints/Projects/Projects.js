@@ -9,10 +9,10 @@ import styles from "./Projects.css";
 const s = classNames.bind(styles);
 
 class Projects extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const { projects } = this.props;
 
-    if (!projects.fulfilled) {
+    if (!projects.projectsFulfilled) {
       this.props.clientSideFetchProjects();
     }
   }
@@ -20,7 +20,7 @@ class Projects extends Component {
   getMarkup() {
     const { projects } = this.props;
 
-    if (projects.fulfilled && projects.data.length > 0) {
+    if (projects.projectsFulfilled && projects.data.length > 0) {
       return (
         <ul className={s({ list: true })}>
           {projects.data.map((project, index) => (
@@ -28,18 +28,17 @@ class Projects extends Component {
           ))}
         </ul>
       );
-    } else if (projects.fetching) {
-      return <p>Laddar!</p>;
+    } else if (projects.projectsRejected) {
+      return <p>Error!</p>;
     }
-
-    return <p>Error!</p>;
+    return <p>Laddar data!</p>;
   }
 
   render() {
     return (
       <DocumentTitle title={"Projekt"}>
         <main className={s({ container: true })}>
-          <h4>Projekt!</h4>
+          <h4>Alla projekt</h4>
           {this.getMarkup()}
         </main>
       </DocumentTitle>

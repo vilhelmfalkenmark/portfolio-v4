@@ -1,6 +1,8 @@
-const router = require("express").Router();
+import express from "express";
 
-module.exports = () => {
+const router = express.Router();
+
+export default () => {
   router.route("/").get((req, res) => {
     console.log("Anrop körs till erfarenheter!");
 

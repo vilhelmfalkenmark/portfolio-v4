@@ -30,6 +30,13 @@ const ProjectsEntrypoint = Loadable({
   modules: ["ProjectsEntrypoint"]
 });
 
+const ProjectDetailsEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "ProjectDetailsEntrypoint" */ "../entrypoints/ProjectDetails"),
+  loading: Loading,
+  modules: ["ProjectDetailsEntrypoint"]
+});
+
 const ExperiencesEntrypoint = Loadable({
   loader: () =>
     import(/* webpackChunkName: "ExperiencesEntrypoint" */ "../entrypoints/Experiences"),
@@ -53,11 +60,21 @@ export const LANDING_ROUTE = {
 };
 
 export const PROJECTS_ROUTE = {
-  exact: true,
+  exact: false,
   navTitle: "Projekt",
   path: "/projekt/",
-  apiPath: "/projects/",
+  apiPath: "/projects",
   component: ProjectsEntrypoint,
+  ssrContentRequest: serverSideFetchProjects,
+  key: 219
+};
+
+export const PROJECT_DETAILS_ROUTE = {
+  exact: true,
+  navTitle: null,
+  path: "/projekt/:slug",
+  apiPath: "/projects",
+  component: ProjectDetailsEntrypoint,
   ssrContentRequest: serverSideFetchProjects,
   key: 219
 };
@@ -82,4 +99,9 @@ export const NOT_FOUND_ROUTE = {
   key: 220
 };
 
-export default [LANDING_ROUTE, PROJECTS_ROUTE, EXPERIENCES_ROUTE];
+export default [
+  LANDING_ROUTE,
+  PROJECT_DETAILS_ROUTE,
+  PROJECTS_ROUTE,
+  EXPERIENCES_ROUTE
+];

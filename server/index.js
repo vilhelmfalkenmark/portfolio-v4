@@ -33,7 +33,7 @@ app.use(
 app.use("/api", apiHandler());
 
 // Server-side rendering
-app.use(ssrHandler);
+// app.use(ssrHandler);
 
 /**
  * Next, our server app will need to load all modules before rendering,
