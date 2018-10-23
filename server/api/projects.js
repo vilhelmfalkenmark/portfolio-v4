@@ -38,8 +38,6 @@ export default contentful => {
   //////////////////////////////////////////
   router.route("/:slug").get((req, res) => {
     const urlWithoutSlash = req.url.replace(/\//g, ""); // /kombispel/ --> kombispel
-    console.log("Slår här!");
-
     const projects = contentful
       .getEntries({
         content_type: "projects"
@@ -54,7 +52,12 @@ export default contentful => {
       });
     promiseResolve(projects)
       .then(data => {
-        console.log(data, " <-- data");
+        if (!data) {
+          res.sendStatus(404);
+          res.json({
+            data: "Error när info skulle hämtas"
+          });
+        }
 
         res.json({
           data

@@ -19,16 +19,22 @@ class ProjectDetails extends Component {
     this.pageSlug = pluckSlug(props.location.pathname);
   }
 
+  fetchContent() {}
+
   componentDidMount() {
-    const { projects, projectDetailsFromStore } = this.props;
+    const {
+      projects,
+      projectDetailsFromStore,
+      clientSideFetchProjectDetails
+    } = this.props;
     /**
-     * Check if project already has been fetched
+     * Check if projects already have been fetched
      */
     if (projects.data.length > 0 && projects.projectsFulfilled) {
       let i = 0;
       while (i < projects.data.length) {
         if (projects.data[i].slug === this.pageSlug) {
-          projectDetailsFromStore(projects.data[i]);
+          return projectDetailsFromStore(projects.data[i]);
         }
         i++;
       }
@@ -36,7 +42,7 @@ class ProjectDetails extends Component {
        * Otherwise fetch it
        */
     } else if (!projects.projectDetailsFulfilled) {
-      this.props.clientSideFetchProjectDetails(pluckSlug(this.pageSlug));
+      return clientSideFetchProjectDetails(pluckSlug(this.pageSlug));
     }
   }
 

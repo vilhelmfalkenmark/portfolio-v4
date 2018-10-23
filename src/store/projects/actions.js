@@ -49,7 +49,7 @@ export const serverSideFetchProjects = store => {
  */
 //////////////////////////////////////////////////
 export const clientSideFetchProjectDetails = slug => {
-  console.log(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`);
+  console.log(slug, " <-- slug");
 
   return function(dispatch) {
     dispatch({ type: PROJECT_DETAILS_FETCHING });
@@ -62,6 +62,19 @@ export const clientSideFetchProjectDetails = slug => {
         dispatch({ type: PROJECT_DETAILS_REJECTED, payload: err });
       });
   };
+};
+
+export const serverSideFetchProjectDetails = ({ store, slug }) => {
+  return asyncRequest
+    .get(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`)
+    .then(({ data }) => {
+      store.dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: data.data });
+      return store;
+    })
+    .catch(err => {
+      store.dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: err });
+      return store;
+    });
 };
 
 // Project is already present in store

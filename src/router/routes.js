@@ -1,7 +1,10 @@
 import React from "react";
 import Loadable from "react-loadable";
 import { serverSideFetchExperiences } from "store/experiences/actions";
-import { serverSideFetchProjects } from "store/projects/actions";
+import {
+  serverSideFetchProjects,
+  serverSideFetchProjectDetails
+} from "store/projects/actions";
 import { serverSideFetchLandingPage } from "store/landingPage/actions";
 
 function Loading() {
@@ -62,7 +65,7 @@ export const LANDING_ROUTE = {
 export const PROJECTS_ROUTE = {
   exact: false,
   navTitle: "Projekt",
-  path: "/projekt/",
+  path: "/projekt/", // "/projekt/"
   apiPath: "/projects",
   component: ProjectsEntrypoint,
   ssrContentRequest: serverSideFetchProjects,
@@ -72,10 +75,11 @@ export const PROJECTS_ROUTE = {
 export const PROJECT_DETAILS_ROUTE = {
   exact: true,
   navTitle: null,
-  path: "/projekt/:slug",
-  apiPath: "/projects",
+  path: "/projekt/:slug", // "/projekt/:slug" or projekt/kombispel
+  // path: /^\/projekt\/([^/]+?)\/?$/i, // "/projekt/:slug" or projekt/kombispel
+  apiPath: "/projects", // TODO add comment about why it is written like this
   component: ProjectDetailsEntrypoint,
-  ssrContentRequest: serverSideFetchProjects,
+  ssrContentRequest: serverSideFetchProjectDetails,
   key: 219
 };
 
@@ -92,7 +96,7 @@ export const EXPERIENCES_ROUTE = {
 export const NOT_FOUND_ROUTE = {
   exact: true,
   navTitle: "Erfarenheter",
-  path: "/erfarenheter/",
+  path: "*",
   apiPath: "/experiences/",
   component: ExperiencesEntrypoint,
   ssrContentRequest: serverSideFetchExperiences,
