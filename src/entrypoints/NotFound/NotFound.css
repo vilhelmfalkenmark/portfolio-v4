@@ -1,0 +1,12 @@
+@import "grid";
+@import "variables";
+
+.container {
+  @mixin pageContainer;
+
+  position: relative;
+}
+
+.content {
+  @mixin contentContainer;
+}

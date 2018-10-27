@@ -9,38 +9,37 @@ import {
   PROJECT_DETAILS_REJECTED
 } from "store/actionTypes";
 
-import { PROJECTS_ROUTE, PROJECT_DETAILS_ROUTE } from "router/routes";
+import { PROJECTS_ROUTE } from "router/routes";
 
 //////////////////////////////////////////////////
 /**
  * ALL PROJECTS
  */
 //////////////////////////////////////////////////
-export const clientSideFetchProjects = () => {
+export const fetchProjects = ({ store = {}, isServer }) => {
   return function(dispatch) {
-    dispatch({ type: PROJECTS_FETCHING });
-    asyncRequest
+    if (!isServer) {
+      dispatch({ type: PROJECTS_FETCHING });
+    }
+    return asyncRequest
       .get(PROJECTS_ROUTE.apiPath)
       .then(({ data }) => {
-        dispatch({ type: PROJECTS_FULFILLED, payload: data.data });
+        if (!isServer) {
+          dispatch({ type: PROJECTS_FULFILLED, payload: data.data });
+        } else {
+          store.dispatch({ type: PROJECTS_FULFILLED, payload: data.data });
+          return store;
+        }
       })
       .catch(err => {
-        dispatch({ type: PROJECTS_REJECTED, payload: err });
+        if (!isServer) {
+          dispatch({ type: PROJECTS_REJECTED, payload: err });
+        } else {
+          store.dispatch({ type: PROJECTS_REJECTED, payload: err });
+          return store;
+        }
       });
   };
-};
-
-export const serverSideFetchProjects = store => {
-  return asyncRequest
-    .get(PROJECTS_ROUTE.apiPath)
-    .then(({ data }) => {
-      store.dispatch({ type: PROJECTS_FULFILLED, payload: data.data });
-      return store;
-    })
-    .catch(err => {
-      store.dispatch({ type: PROJECTS_REJECTED, payload: err });
-      return store;
-    });
 };
 
 //////////////////////////////////////////////////
@@ -48,33 +47,33 @@ export const serverSideFetchProjects = store => {
  * SINGLE PROJECT
  */
 //////////////////////////////////////////////////
-export const clientSideFetchProjectDetails = slug => {
-  console.log(slug, " <-- slug");
-
+export const fetchProjectDetails = ({ store = {}, isServer, slug }) => {
   return function(dispatch) {
-    dispatch({ type: PROJECT_DETAILS_FETCHING });
-    asyncRequest
-      .get(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`)
+    if (!isServer) {
+      dispatch({ type: PROJECT_DETAILS_FETCHING });
+    }
+    return asyncRequest
+      .get(`${PROJECTS_ROUTE.apiPath}/${slug}/`)
       .then(({ data }) => {
-        dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: data.data });
+        if (!isServer) {
+          dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: data.data });
+        } else {
+          store.dispatch({
+            type: PROJECT_DETAILS_FULFILLED,
+            payload: data.data
+          });
+          return store;
+        }
       })
       .catch(err => {
-        dispatch({ type: PROJECT_DETAILS_REJECTED, payload: err });
+        if (!isServer) {
+          dispatch({ type: PROJECT_DETAILS_REJECTED, payload: err });
+        } else {
+          store.dispatch({ type: PROJECT_DETAILS_REJECTED, payload: err });
+          return store;
+        }
       });
   };
-};
-
-export const serverSideFetchProjectDetails = ({ store, slug }) => {
-  return asyncRequest
-    .get(`${PROJECT_DETAILS_ROUTE.apiPath}/${slug}/`)
-    .then(({ data }) => {
-      store.dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: data.data });
-      return store;
-    })
-    .catch(err => {
-      store.dispatch({ type: PROJECT_DETAILS_FULFILLED, payload: err });
-      return store;
-    });
 };
 
 // Project is already present in store
@@ -83,4 +82,4 @@ export const projectDetailsFromStore = project => ({
   payload: project
 });
 
-export default clientSideFetchProjects;
+export default fetchProjects;

@@ -15,11 +15,17 @@ const Project = ({ project }) => {
       <h4> {project.title}</h4>
       <p> {project.content}</p>
       {project.link && (
-        <a target="_BLANK" href={project.link}>
+        <a target="_BLANK" href={project.link} rel="noreferrer">
           {project.link}
         </a>
       )}
-      {imageUrl && <img src={imageUrl} alt={project.imageAlt} />}
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={project.imageAlt}
+          className={`${s("image")} lazyload`}
+        />
+      )}
       <NavLink to={`${project.slug}/`}>{`Läs mer`}</NavLink>
     </li>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 import Loadable from "react-loadable";
-import { serverSideFetchExperiences } from "store/experiences/actions";
-import {
-  serverSideFetchProjects,
-  serverSideFetchProjectDetails
-} from "store/projects/actions";
-import { serverSideFetchLandingPage } from "store/landingPage/actions";
+// import { serverSideFetchExperiences } from "store/experiences/actions";
+// import {
+//   serverSideFetchProjects,
+//   serverSideFetchProjectDetails
+// } from "store/projects/actions";
+// import { serverSideFetchLandingPage } from "store/landingPage/actions";
 
 function Loading() {
   return (
@@ -47,6 +47,13 @@ const ExperiencesEntrypoint = Loadable({
   modules: ["ExperiencesEntrypoint"]
 });
 
+const NotFoundEntrypoint = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "NotFoundEntrypoint" */ "../entrypoints/NotFound"),
+  loading: Loading,
+  modules: ["NotFoundEntrypoint"]
+});
+
 //////////////////////////////////////////////////
 /**
  * Routes base
@@ -58,28 +65,24 @@ export const LANDING_ROUTE = {
   path: "/",
   apiPath: "/landing-page/",
   component: LandingPageEntrypoint,
-  ssrContentRequest: serverSideFetchLandingPage,
   key: 218
 };
 
 export const PROJECTS_ROUTE = {
   exact: false,
   navTitle: "Projekt",
-  path: "/projekt/", // "/projekt/"
+  path: "/projekt/",
   apiPath: "/projects",
   component: ProjectsEntrypoint,
-  ssrContentRequest: serverSideFetchProjects,
   key: 219
 };
 
 export const PROJECT_DETAILS_ROUTE = {
   exact: true,
   navTitle: null,
-  path: "/projekt/:slug", // "/projekt/:slug" or projekt/kombispel
-  // path: /^\/projekt\/([^/]+?)\/?$/i, // "/projekt/:slug" or projekt/kombispel
+  path: "/projekt/:slug",
   apiPath: "/projects", // TODO add comment about why it is written like this
   component: ProjectDetailsEntrypoint,
-  ssrContentRequest: serverSideFetchProjectDetails,
   key: 219
 };
 
@@ -89,17 +92,13 @@ export const EXPERIENCES_ROUTE = {
   path: "/erfarenheter/",
   apiPath: "/experiences/",
   component: ExperiencesEntrypoint,
-  ssrContentRequest: serverSideFetchExperiences,
   key: 220
 };
 
 export const NOT_FOUND_ROUTE = {
-  exact: true,
-  navTitle: "Erfarenheter",
-  path: "*",
-  apiPath: "/experiences/",
-  component: ExperiencesEntrypoint,
-  ssrContentRequest: serverSideFetchExperiences,
+  exact: false,
+  path: "/sidan-kunde-hittas/",
+  component: NotFoundEntrypoint,
   key: 220
 };
 

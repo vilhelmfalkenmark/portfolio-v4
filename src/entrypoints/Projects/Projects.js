@@ -1,10 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import DocumentTitle from "react-document-title";
-import classNames from "classnames/bind";
-import { clientSideFetchProjects } from "store/projects/actions";
-import Project from "components/Lists/Project";
-import styles from "./Projects.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title';
+import classNames from 'classnames/bind';
+import { Redirect } from 'react-router-dom';
+import { NOT_FOUND_ROUTE } from 'router/routes';
+
+import { fetchProjects } from 'store/projects/actions';
+import Project from 'components/Lists/Project';
+import styles from './Projects.css';
 
 const s = classNames.bind(styles);
 
@@ -13,7 +16,7 @@ class Projects extends Component {
     const { projects } = this.props;
 
     if (!projects.projectsFulfilled) {
-      this.props.clientSideFetchProjects();
+      this.props.fetchProjects();
     }
   }
 
@@ -35,8 +38,14 @@ class Projects extends Component {
   }
 
   render() {
+    const { projects } = this.props;
+
+    if (projects.pageNotFound && !projects.projectsFetching) {
+      return <Redirect to={NOT_FOUND_ROUTE.path} />;
+    }
+
     return (
-      <DocumentTitle title={"Projekt"}>
+      <DocumentTitle title={'Projekt'}>
         <main className={s({ container: true })}>
           <h4>Alla projekt</h4>
           {this.getMarkup()}
@@ -51,8 +60,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clientSideFetchProjects: () => {
-    dispatch(clientSideFetchProjects());
+  fetchProjects: () => {
+    dispatch(fetchProjects({ isServer: false }));
   }
 });
 

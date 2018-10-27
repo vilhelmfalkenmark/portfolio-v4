@@ -1,1 +1,1 @@
-export { default } from "./ParallaxHero";
+export { default } from './ParallaxHero';

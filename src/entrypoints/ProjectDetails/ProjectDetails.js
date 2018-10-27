@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import DocumentTitle from "react-document-title";
-import classNames from "classnames/bind";
-import ParallaxHero from "components/ParallaxHero";
-import { pluckImageUrl } from "utils/selectors/projects";
-import { pluckSlug } from "utils/network/url";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title';
+import classNames from 'classnames/bind';
+import { Redirect } from 'react-router-dom';
+import { NOT_FOUND_ROUTE } from 'router/routes';
+import ParallaxHero from 'components/ParallaxHero';
+import { pluckImageUrl } from 'utils/selectors/projects';
+import { pluckSlug } from 'utils/network/url';
 import {
-  clientSideFetchProjectDetails,
+  fetchProjectDetails,
   projectDetailsFromStore
-} from "store/projects/actions";
-import styles from "./ProjectDetails.css";
+} from 'store/projects/actions';
+import styles from './ProjectDetails.css';
 
 const s = classNames.bind(styles);
 
@@ -25,7 +27,7 @@ class ProjectDetails extends Component {
     const {
       projects,
       projectDetailsFromStore,
-      clientSideFetchProjectDetails
+      fetchProjectDetails
     } = this.props;
     /**
      * Check if projects already have been fetched
@@ -42,7 +44,7 @@ class ProjectDetails extends Component {
        * Otherwise fetch it
        */
     } else if (!projects.projectDetailsFulfilled) {
-      return clientSideFetchProjectDetails(pluckSlug(this.pageSlug));
+      return fetchProjectDetails(this.pageSlug);
     }
   }
 
@@ -56,7 +58,7 @@ class ProjectDetails extends Component {
       return [
         <ParallaxHero
           imageUrl={pluckImageUrl(detailData.image)}
-          title={"_STATIC_"}
+          title={'_STATIC_'}
           key={1}
         />,
         <section key={2} className={s({ contentSection: true })}>
@@ -78,8 +80,14 @@ class ProjectDetails extends Component {
   }
 
   render() {
+    const { projects } = this.props;
+
+    if (projects.pageNotFound && !projects.projectDetailsFetching) {
+      return <Redirect to={NOT_FOUND_ROUTE.path} />;
+    }
+
     return (
-      <DocumentTitle title={"Projekt"}>
+      <DocumentTitle title={'Projekt'}>
         <main className={s({ container: true })}>{this.getMarkup()}</main>
       </DocumentTitle>
     );
@@ -91,8 +99,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clientSideFetchProjectDetails: slug => {
-    dispatch(clientSideFetchProjectDetails(slug));
+  fetchProjectDetails: slug => {
+    dispatch(fetchProjectDetails({ slug, isServer: false }));
   },
   projectDetailsFromStore: project => {
     dispatch(projectDetailsFromStore(project));

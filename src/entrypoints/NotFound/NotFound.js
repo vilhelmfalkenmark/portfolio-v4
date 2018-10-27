@@ -10,13 +10,9 @@ const NotFound = () => {
   return (
     <DocumentTitle title={"Sidan kunde inte hittas"}>
       <main className={s({ container: true })}>
-        <h1>404!</h1>
-        <h1>404!</h1>
-        <h1>404!</h1>
-        <h1>404!</h1>
-        <h1>404!</h1>
-        <h1>404!</h1>
-        <h1>404!</h1>
+        <div className={s("content")}>
+          <h1>404!</h1>
+        </div>
       </main>
     </DocumentTitle>
   );

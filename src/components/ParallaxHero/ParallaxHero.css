@@ -6,21 +6,26 @@
   right: 0;
   bottom: 0;
   left: 0;
-  /* transform: translateZ(-1px) scale(2); */
 }
 
 .imageContainer {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 0;
   background-size: cover;
+  transform: translateZ(-1px);
+
   background-repeat: no-repeat;
   background-position: center center;
-  left: 0;
 }
 
 .title {
+  transform: translateZ(0);
+
   position: absolute;
   top: 50%;
   left: 50%;

@@ -1,13 +1,13 @@
-import React from "react";
-import classNames from "classnames/bind";
-import styles from "./ParallaxHero.css";
+import React from 'react';
+import classNames from 'classnames/bind';
+import styles from './ParallaxHero.css';
 
 const s = classNames.bind(styles);
 const ParallaxHero = ({ imageUrl, title }) => {
   return (
-    <section className={s({ container: true })}>
+    <section className={s('container')}>
       <picture
-        className={s({ imageContainer: true })}
+        className={s('imageContainer')}
         style={{
           backgroundImage: `url(${imageUrl})`
         }}

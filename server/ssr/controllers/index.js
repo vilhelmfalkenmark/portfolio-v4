@@ -1,39 +1,68 @@
-import express from "express";
-import middleware from "../middleware";
-import configureStore from "store";
-import clientRoutes from "router/routes";
-import promiseResolve from "utils/helpers/promises";
+import express from 'express';
+import renderer from 'renderer';
+import configureStore from 'store';
+import promiseResolve from 'utils/helpers/promises';
+import { pluckSlug } from 'utils/network/url';
+
+import { fetchProjects, fetchProjectDetails } from 'store/projects/actions';
 
 const router = express.Router();
 
-const fetchEntryPointContent = ({ store, req, res, next }) => {
-  console.log(req.url, " <-- req.url");
+/**
+ * Projects
+ */
+const fetchProjectsContent = ({ store, req, res, next }) =>
+  promiseResolve(fetchProjects({ store, isServer: true })())
+    .then(storeWithContent => {
+      renderer(storeWithContent)(req, res, next);
+    })
+    .catch(err => {
+      renderer(store)(req, res, next, err);
+    });
 
-  let i;
-  for (i = 0; i < clientRoutes.length; i += 1) {
-    if (req.url.match(clientRoutes[i].regexRouteMatch)) {
-      console.log("I fetchEntryPointContent");
+const fetchProjectDetailsContent = ({ store, req, res, next }) =>
+  promiseResolve(
+    fetchProjectDetails({ store, isServer: true, slug: pluckSlug(req.url) })()
+  )
+    .then(storeWithContent => {
+      renderer(storeWithContent)(req, res, next);
+    })
+    .catch(err => {
+      renderer(store)(req, res, next, err);
+    });
 
-      return promiseResolve(clientRoutes[i].ssrContentRequest(store))
-        .then(storeWithContent => {
-          middleware(storeWithContent)(req, res, next);
-        })
-        .catch(err => {
-          middleware(store)(req, res, next, err);
-        });
-    }
-  }
-  return middleware(store)(req, res, next);
-};
-
-// TODO Continue here with controllers for different routes
+// ///////////////////////////////////////////////////////////////
+/**
+ * Routing
+ */
+// ///////////////////////////////////////////////////////////////
 export default () => {
-  router.get("/", (req, res, next) => {
-    res.json({ message: "Välkommen till mitt Portfolio API" });
+  /**
+   * Projects
+   */
+  router.get('/projekt/:slug/', (req, res, next) => {
+    fetchProjectDetailsContent({ store: configureStore(), req, res, next });
   });
-  router.use("/erfarenheter/", null);
-  router.use("/projekt/", null);
-  router.use("/landing-page/", null);
+  router.get('/projekt/', (req, res, next) => {
+    fetchProjectsContent({ store: configureStore(), req, res, next });
+  });
+
+  /**
+   * Landing page
+   */
+  router.get('/', (req, res, next) => {
+    fetchProjectsContent({ store: configureStore(), req, res, next });
+  });
+
+  /**
+   * 404
+   */
+  router.get('*', (req, res, next) => {
+    fetchProjectsContent({ store: configureStore(), req, res, next });
+  });
+
+  // router.use("/erfarenheter/", null);
+  return router;
 };
 
 // const actionIndex = (req, res, next) => {

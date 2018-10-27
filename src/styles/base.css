@@ -13,6 +13,19 @@ html {
   height: 100%;
 }
 
+img,
+picture {
+  transition: opacity 200ms;
+}
+
+[class*="lazyload"] {
+  opacity: 0;
+}
+
+[class*="lazyloaded"] {
+  opacity: 1;
+}
+
 body {
   margin: 0;
   padding: 0;

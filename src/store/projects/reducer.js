@@ -11,6 +11,7 @@ const iS = {
   projectsFulfilled: false,
   projectsFetching: false,
   projectsRejected: false,
+  pageNotFound: false,
   projectDetailsFulfilled: false,
   projectDetailsFetching: false,
   projectDetailsRejected: false,
@@ -24,12 +25,16 @@ const projects = (state = iS, action) => {
      * ALL PROJECTS
      */
     case PROJECTS_FETCHING: {
-      return Object.assign({}, state, { projectsFetching: true });
+      return Object.assign({}, state, {
+        projectsFetching: true,
+        pageNotFound: false
+      });
     }
     case PROJECTS_FULFILLED: {
       return Object.assign({}, state, {
         projectsFulfilled: true,
         projectsFetching: false,
+        pageNotFound: false,
         data: action.payload
       });
     }
@@ -37,6 +42,7 @@ const projects = (state = iS, action) => {
       return Object.assign({}, state, {
         projectsFulfilled: false,
         projectsFetching: false,
+        pageNotFound: true,
         projectsRejected: true
       });
     }
@@ -44,13 +50,17 @@ const projects = (state = iS, action) => {
      * SINGLE PROJECT
      */
     case PROJECT_DETAILS_FETCHING: {
-      return Object.assign({}, state, { projectDetailsFetching: true });
+      return Object.assign({}, state, {
+        projectDetailsFetching: true,
+        pageNotFound: false
+      });
     }
     case PROJECT_DETAILS_FULFILLED: {
       return Object.assign({}, state, {
         projectDetailsFulfilled: true,
         projectDetailsFetching: false,
         projectDetailsRejected: false,
+        pageNotFound: false,
         detailData: action.payload
       });
     }
@@ -58,6 +68,7 @@ const projects = (state = iS, action) => {
       return Object.assign({}, state, {
         projectDetailsFulfilled: false,
         projectDetailsFetching: false,
+        pageNotFound: true,
         projectDetailsRejected: true
       });
     }
