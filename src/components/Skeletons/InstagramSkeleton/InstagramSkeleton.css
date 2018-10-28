@@ -1,11 +1,11 @@
-@import "grid";
-@import "breakpoints";
-@import "skeleton";
-@import "variables";
+@import 'grid';
+@import 'breakpoints';
+@import 'skeleton';
+@import 'variables';
 
 .list {
   list-style: none;
-  @mixin flexRow 1rem;
+  @mixin flex-row 1rem;
 }
 
 .item {

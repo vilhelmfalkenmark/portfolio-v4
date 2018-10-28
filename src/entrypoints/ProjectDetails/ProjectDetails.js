@@ -11,7 +11,7 @@ import {
   fetchProjectDetails,
   projectDetailsFromStore
 } from 'store/projects/actions';
-import styles from './ProjectDetails.css';
+import styles from './ProjectDetails.scss';
 
 const s = classNames.bind(styles);
 

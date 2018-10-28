@@ -1,0 +1,12 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.container {
+  @include page-container();
+
+  position: relative;
+}
+
+.content {
+  @include content-container();
+}

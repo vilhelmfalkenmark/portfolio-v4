@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import DocumentTitle from "react-document-title";
-import classNames from "classnames/bind";
-import { clientSideFetchExperiences } from "store/experiences/actions";
-import styles from "./Experiences.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title';
+import classNames from 'classnames/bind';
+import { clientSideFetchExperiences } from 'store/experiences/actions';
+import styles from './Experiences.scss';
 
 const s = classNames.bind(styles);
 
@@ -18,7 +18,7 @@ class Experiences extends Component {
 
   getMarkup() {
     const { experiences } = this.props;
-    console.log(experiences, " <-- this.props.experiences");
+    console.log(experiences, ' <-- this.props.experiences');
 
     if (experiences.fulfilled && experiences.data.length > 0) {
       return (
@@ -37,7 +37,7 @@ class Experiences extends Component {
 
   render() {
     return (
-      <DocumentTitle title={"CV"}>
+      <DocumentTitle title={'CV'}>
         <main className={s({ container: true })}>
           <h4>CV!</h4>
           {this.getMarkup()}

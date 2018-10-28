@@ -1,4 +1,4 @@
-@import "variables";
+@import '~styles/variables';
 
 @keyframes pulse {
   0% {
@@ -9,8 +9,12 @@
   }
 }
 
-@define-mixin skeleton $gradientBackground: var(--skeleton-background),
-  $gradientPulse: var(--skeleton-gradient), $height: 5rem, $paddingbottom: 0 {
+@mixin skeleton(
+  $gradientBackground: $skeleton-background,
+  $gradientPulse: $skeleton-gradient,
+  $height: 5rem,
+  $paddingbottom: 0
+) {
   position: relative;
   overflow: hidden;
   background-color: $gradientBackground;
@@ -33,6 +37,6 @@
     display: block;
     position: relative;
     padding-bottom: $paddingbottom; /* <-- PASS 100% if I want the cube to a perfect square */
-    content: "";
+    content: '';
   }
 }

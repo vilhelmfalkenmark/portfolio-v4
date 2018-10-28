@@ -9,6 +9,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -96,6 +97,7 @@ module.exports = {
       utils: path.resolve(paths.appSrc, 'utils'),
       layout: path.resolve(paths.appSrc, 'layout'),
       router: path.resolve(paths.appSrc, 'router'),
+      styles: path.resolve(paths.appSrc, 'styles'),
       fonts: path.resolve(paths.appSrc, 'styles/fonts')
     },
     plugins: [
@@ -164,7 +166,7 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /\.css$/,
+            test: /\.scss$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -179,10 +181,25 @@ module.exports = {
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
-                  config: {
-                    path: paths.postcssConfig
-                  }
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 11'
+                      ],
+                      flexbox: 'no-2009'
+                    })
+                  ]
                 }
+              },
+              {
+                loader: require.resolve('sass-loader')
               }
             ]
           },

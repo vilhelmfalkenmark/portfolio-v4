@@ -6,7 +6,7 @@ import Header from 'layout/Header';
 import NotFound from 'entrypoints/NotFound';
 
 import classNames from 'classnames/bind';
-import styles from './Root.css';
+import styles from './Root.scss';
 
 const s = classNames.bind(styles);
 

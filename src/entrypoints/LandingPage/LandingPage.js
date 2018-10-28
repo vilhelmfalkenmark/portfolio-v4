@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import DocumentTitle from "react-document-title";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title';
 // import GoogleMaps from "components/GoogleMaps";
-import Hero from "components/Hero";
-import { clientSideFetchLandingPage } from "store/landingPage/actions";
-import Scroll from "react-scroll";
+import Hero from 'components/Hero';
+import { clientSideFetchLandingPage } from 'store/landingPage/actions';
+import Scroll from 'react-scroll';
 
-import classNames from "classnames/bind";
+import classNames from 'classnames/bind';
 
-import styles from "./LandingPage.css";
+import styles from './LandingPage.scss';
 
 const s = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ class LandingPage extends Component {
 
   scrollToContent() {
     const offset = window.innerWidth > 900 ? -112 : 0;
-    Scroll.scroller.scrollTo("scroll-target", {
+    Scroll.scroller.scrollTo('scroll-target', {
       duration: 300,
       delay: 0,
       smooth: true,

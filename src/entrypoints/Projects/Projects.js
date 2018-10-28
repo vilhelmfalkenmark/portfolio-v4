@@ -7,7 +7,7 @@ import { NOT_FOUND_ROUTE } from 'router/routes';
 
 import { fetchProjects } from 'store/projects/actions';
 import Project from 'components/Lists/Project';
-import styles from './Projects.css';
+import styles from './Projects.scss';
 
 const s = classNames.bind(styles);
 

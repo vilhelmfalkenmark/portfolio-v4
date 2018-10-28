@@ -1,0 +1,30 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: none;
+  height: 100vh;
+
+  &:after {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    background: linear-gradient(270deg, #4a2525, #111a54);
+    opacity: 0.8;
+  }
+}
+
+.logo {
+  height: 10rem;
+  width: 10rem;
+}

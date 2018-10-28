@@ -5,7 +5,7 @@ import Logo from 'components/Logo';
 import routes, { LANDING_ROUTE } from 'router/routes';
 import classNames from 'classnames/bind';
 
-import styles from './Header.css';
+import styles from './Header.scss';
 
 const s = classNames.bind(styles);
 

@@ -1,6 +1,6 @@
-@import "variables";
-@import "grid";
-@import "breakpoints";
+@import 'variables';
+@import 'grid';
+@import 'breakpoints';
 
 .container {
   background: var(--text-grey);
@@ -14,16 +14,16 @@
 }
 
 .innerContainer {
-  @mixin contentContainer;
+  @mixin content-container;
 }
 
 .grid {
-  @mixin flexRow 0;
+  @mixin flex-row 0;
 
   margin-bottom: var(--default-margin);
 
   @media (--viewport-min-768) {
-    @mixin flexRow 1rem;
+    @mixin flex-row 1rem;
   }
 }
 

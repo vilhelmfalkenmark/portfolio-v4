@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import SVG from 'components/SVG';
 import ville from 'assets/svg/ville.svg';
-import styles from './Logo.css';
+import styles from './Logo.scss';
 
 const s = classNames.bind(styles);
 

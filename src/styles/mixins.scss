@@ -1,0 +1,92 @@
+@import '~styles/variables';
+
+@mixin media-query($width, $type: min) {
+  @if $type == max {
+    $width: $width - 1px;
+  }
+  @media only screen and (#{$type}-width: $width) {
+    @content;
+  }
+}
+
+@mixin flex-row($margin: 1rem) {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
+  margin-left: calc($margin/2 * -1);
+  margin-right: calc($margin/2 * -1);
+}
+
+@mixin flex-gtr-col($columns: 2, $gutter: 1rem) {
+  flex-basis: calc(1 / $columns * 100% - $gutter);
+  margin: 0 calc($gutter/2) $gutter calc($gutter/2);
+}
+
+@mixin landing-page-container() {
+  margin-top: 0;
+
+  @include media-query($lg) {
+    padding-top: $header-desk-height;
+  }
+}
+
+@mixin page-container() {
+  margin-top: 1rem;
+
+  @include media-query($lg) {
+    margin-top: $header-desk-height;
+  }
+}
+
+@mixin content-container() {
+  flex: 1 0;
+  width: calc(100% - $default-margin);
+  max-width: $page-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $double-default-margin 0;
+
+  @include media-query($md) {
+    width: calc(100% - $double-default-margin);
+  }
+  @include media-query($lg) {
+    width: calc(100% - $double-default-margin);
+  }
+}
+
+@mixin card($padding: 2rem) {
+  background-color: $white;
+  padding: $padding;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+// Used on the picture element holding the image
+@mixin aspect-ratio-16-9-wrapper() {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+//  Used on img element
+@mixin aspect-ratio-16-9-image() {
+  width: 100%;
+  display: block;
+  position: absolute;
+  height: auto;
+  top: 0;
+  left: 0;
+}
+
+@mixin absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

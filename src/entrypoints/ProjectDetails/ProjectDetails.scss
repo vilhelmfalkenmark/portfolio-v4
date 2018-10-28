@@ -1,0 +1,18 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.container {
+  @include page-container();
+
+  position: relative;
+}
+
+.content {
+  @include content-container();
+}
+
+.contentSection {
+  width: 100%;
+  transform: translateZ(0);
+  background-color: $app-background;
+}

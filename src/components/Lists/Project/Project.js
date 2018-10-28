@@ -1,9 +1,9 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { pluckImageUrl } from "utils/selectors/projects";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { pluckImageUrl } from 'utils/selectors/projects';
 
-import classNames from "classnames/bind";
-import styles from "./Project.css";
+import classNames from 'classnames/bind';
+import styles from './Project.css';
 
 const s = classNames.bind(styles);
 
@@ -21,9 +21,9 @@ const Project = ({ project }) => {
       )}
       {imageUrl && (
         <img
-          src={imageUrl}
+          src={`${imageUrl}?w=500`}
           alt={project.imageAlt}
-          className={`${s("image")} lazyload`}
+          className={`${s('image')} lazyload`}
         />
       )}
       <NavLink to={`${project.slug}/`}>{`Läs mer`}</NavLink>

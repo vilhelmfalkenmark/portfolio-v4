@@ -1,12 +1,12 @@
-@import "grid";
-@import "breakpoints";
-@import "variables";
+@import 'grid';
+@import 'breakpoints';
+@import 'variables';
 
 .list {
-  @mixin flexRow 0;
+  @mixin flex-row 0;
 
   @media (--viewport-min-768) {
-    @mixin flexRow 1rem;
+    @mixin flex-row 1rem;
   }
 }
 
@@ -29,7 +29,7 @@
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     padding-bottom: 100%;
     display: block;
   }
@@ -40,7 +40,7 @@
 }
 
 .likesContainer {
-  @mixin flexCenter;
+  @mixin flex-center;
 
   margin: 0 0 0.5rem 0;
 }

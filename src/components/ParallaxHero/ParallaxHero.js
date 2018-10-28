@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import styles from './ParallaxHero.css';
+import styles from './ParallaxHero.scss';
 
 const s = classNames.bind(styles);
 const ParallaxHero = ({ imageUrl, title }) => {

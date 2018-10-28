@@ -1,10 +1,10 @@
-@import "grid";
+@import 'grid';
 
 .withoutRibbonContainer {
-  @mixin landingPageContainer;
+  @mixin landing-page-container;
 }
 
 .withRibbonContainer {
-  @mixin pageContainer;
-  @mixin contentContainer;
+  @mixin page-container;
+  @mixin content-container;
 }
