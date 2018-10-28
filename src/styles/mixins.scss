@@ -1,31 +1,73 @@
 @import '~styles/variables';
 
-@mixin media-query($width, $type: min) {
-  @if $type == max {
-    $width: $width - 1px;
-  }
-  @media only screen and (#{$type}-width: $width) {
-    @content;
+//////////////////////////////////////////////////
+/**
+* Flex grid
+*/
+//////////////////////////////////////////////////
+@mixin breakpoint($min, $max: null) {
+  @if $max {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
   }
 }
 
-@mixin flex-row($margin: 1rem) {
+//////////////////////////////////////////////////
+/**
+* Flex grid
+*/
+//////////////////////////////////////////////////
+@mixin flex-row() {
   display: flex;
-  flex-flow: row wrap;
-  flex: 0 1 auto;
-  margin-left: calc($margin/2 * -1);
-  margin-right: calc($margin/2 * -1);
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-@mixin flex-gtr-col($columns: 2, $gutter: 1rem) {
-  flex-basis: calc(1 / $columns * 100% - $gutter);
-  margin: 0 calc($gutter/2) $gutter calc($gutter/2);
+@mixin flex-gtr-col($columns, $gutter) {
+  $percentage: percentage(1 / $columns);
+  $width: (($columns - 1) * $gutter) / $columns;
+  flex-basis: calc(#{$percentage} - #{$width});
+  margin-top: $gutter;
+  margin-left: $gutter/2;
+  margin-right: $gutter/2;
+  @if $columns != 1 {
+    &:nth-of-type(#{$columns}n + 1) {
+      margin-right: $gutter/2;
+      margin-left: 0;
+    }
+    &:nth-of-type(#{$columns}n + #{$columns}) {
+      margin-left: $gutter/2;
+      margin-right: 0;
+    }
+  } @else if $columns == 1 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
+@mixin flex-col($span, $columns, $margin: 0px) {
+  $percentage: percentage($span/$columns);
+  @if $columns != 1 {
+    flex-basis: calc(#{$percentage} - #{$margin});
+  } @else {
+    flex-basis: calc(#{$percentage});
+  }
+}
+
+//////////////////////////////////////////////////
+/**
+* Landing page content
+*/
+//////////////////////////////////////////////////
 @mixin landing-page-container() {
   margin-top: 0;
 
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     padding-top: $header-desk-height;
   }
 }
@@ -33,34 +75,47 @@
 @mixin page-container() {
   margin-top: 1rem;
 
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     margin-top: $header-desk-height;
   }
 }
 
 @mixin content-container() {
   flex: 1 0;
-  width: calc(100% - $default-margin);
+  width: calc(100% - #{$base-margin});
   max-width: $page-max-width;
   margin-left: auto;
   margin-right: auto;
-  padding: $double-default-margin 0;
+  padding: $double-base-margin 0;
 
-  @include media-query($md) {
-    width: calc(100% - $double-default-margin);
+  @include breakpoint($md) {
+    width: calc(100% - #{$double-base-margin});
   }
-  @include media-query($lg) {
-    width: calc(100% - $double-default-margin);
+  @include breakpoint($lg) {
+    width: calc(100% - #{$double-base-margin});
   }
 }
 
+@mixin page-heading() {
+  text-align: center;
+}
+
+//////////////////////////////////////////////////
+/**
+* Cards
+*/
+//////////////////////////////////////////////////
 @mixin card($padding: 2rem) {
   background-color: $white;
   padding: $padding;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
-// Used on the picture element holding the image
+//////////////////////////////////////////////////
+/**
+* Images
+*/
+//////////////////////////////////////////////////
 @mixin aspect-ratio-16-9-wrapper() {
   position: relative;
   overflow: hidden;
@@ -68,8 +123,15 @@
   padding-bottom: 56.25%;
 }
 
+@mixin aspect-ratio-8-5-wrapper() {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 62.5%;
+}
+
 //  Used on img element
-@mixin aspect-ratio-16-9-image() {
+@mixin aspect-ratio-image() {
   width: 100%;
   display: block;
   position: absolute;
@@ -78,6 +140,11 @@
   left: 0;
 }
 
+//////////////////////////////////////////////////
+/**
+* Positioning
+*/
+//////////////////////////////////////////////////
 @mixin absolute-center() {
   position: absolute;
   top: 50%;

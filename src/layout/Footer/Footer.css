@@ -20,7 +20,7 @@
 .grid {
   @mixin flex-row 0;
 
-  margin-bottom: var(--default-margin);
+  margin-bottom: var(--base-margin);
 
   @media (--viewport-min-768) {
     @mixin flex-row 1rem;
@@ -29,12 +29,12 @@
 
 .column {
   border-bottom: 1px solid var(--white);
-  padding-bottom: var(--default-margin);
+  padding-bottom: var(--base-margin);
 
-  @mixin flexGtrCol 1, var(--default-margin);
+  @mixin flexGtrCol 1, var(--base-margin);
 
   @media (--viewport-min-768) {
-    @mixin flexGtrCol 3, var(--default-margin);
+    @mixin flexGtrCol 3, var(--base-margin);
   }
 }
 
@@ -44,7 +44,7 @@
 
 .buttonContainer {
   text-align: center;
-  margin-bottom: var(--double-default-margin);
+  margin-bottom: var(--double-base-margin);
 }
 
 .scrollButton.scrollButton {

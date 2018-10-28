@@ -4,3 +4,7 @@
   @include page-container;
   @include content-container;
 }
+
+.heading {
+  @include page-heading;
+}

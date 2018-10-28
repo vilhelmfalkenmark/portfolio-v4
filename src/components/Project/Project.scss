@@ -1,0 +1,49 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.container {
+  @include flex-row();
+
+  margin-bottom: $triple-base-margin;
+
+  &:nth-of-type(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+.column {
+  @include flex-gtr-col(2, $base-margin);
+}
+
+.inlineLink {
+  margin-left: $base-margin;
+  display: inline-block;
+}
+
+.picture {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
+  position: relative;
+}
+
+.macbook {
+  height: auto;
+  width: 400px;
+}
+
+.portfolioImage {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: auto;
+  width: 310px;
+  border-radius: 5px;
+}
+
+.link {
+  @include absolute-center;
+}

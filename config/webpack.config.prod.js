@@ -162,9 +162,8 @@ module.exports = {
               compact: true
             }
           },
-
           {
-            test: /\.css$/,
+            test: /\.scss$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {

@@ -3,7 +3,7 @@
 @import '~styles/keyframes';
 
 .container {
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     background-color: $white;
     box-shadow: $box-shadow;
     top: 0;
@@ -20,13 +20,13 @@
   display: flex;
   width: 100%;
 
-  @include media-query($lg, max) {
+  @include breakpoint(1px, $lg - 1) {
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
     justify-content: center;
   }
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     height: $header-desk-height;
     justify-content: space-between;
   }
@@ -38,12 +38,12 @@
   align-items: center;
   display: flex;
 
-  @include media-query($lg, max) {
+  @include breakpoint(1px, $lg - 1) {
     height: $header-mobile-height;
     box-shadow: $box-shadow;
     background: $white;
     width: 100%;
-    padding: $half-default-margin;
+    padding: $half-base-margin;
     z-index: $z-index-third;
     top: 0;
     left: 0;
@@ -53,7 +53,7 @@
 .navigation {
   display: flex;
 
-  @include media-query($lg, max) {
+  @include breakpoint(1px, $lg) {
     box-shadow: $box-shadow;
     position: fixed;
     bottom: 0;
@@ -80,7 +80,7 @@
   justify-content: center;
   height: $header-mobile-height;
 
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     padding: 0 1rem;
     height: $header-desk-height;
   }
@@ -94,11 +94,11 @@
   padding: 0.5rem;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   color: $text-grey;
   position: relative;
 
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     flex-direction: row;
     justify-content: center;
   }
@@ -112,7 +112,7 @@
   font-size: 0.8rem;
   line-height: 1rem;
 
-  @include media-query($lg) {
+  @include breakpoint($lg) {
     font-size: 1rem;
     display: inline-block;
     margin-left: 0.5rem;

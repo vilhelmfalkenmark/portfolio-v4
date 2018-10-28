@@ -38,7 +38,7 @@ require('babel-register')({
       'css-modules-transform',
       {
         generateScopedName: '[name]_[local]',
-        extensions: ['.css']
+        extensions: ['.scss']
       }
     ]
   ]

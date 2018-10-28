@@ -30,10 +30,10 @@ $skeleton-gradient: #dadada;
 $link-color: $turquoise;
 
 /* Default sizes */
-$half-default-margin: 0.5rem;
-$default-margin: 1rem;
-$double-default-margin: 2rem;
-$triple-default-margin: 3rem;
+$half-base-margin: 0.5rem;
+$base-margin: 1rem;
+$double-base-margin: 2rem;
+$triple-base-margin: 3rem;
 
 /* Layut sizes */
 $header-desk-height: 5rem;
@@ -57,6 +57,7 @@ $font-size-xl: 1.8rem;
 $font-size-xxl: 2rem;
 
 /* z-index */
+$z-index-negative: -1;
 $z-index-first: 1;
 $z-index-second: 10;
 $z-index-third: 100;

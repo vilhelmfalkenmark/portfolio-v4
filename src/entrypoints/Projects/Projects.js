@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { NOT_FOUND_ROUTE } from 'router/routes';
 
 import { fetchProjects } from 'store/projects/actions';
-import Project from 'components/Lists/Project';
+import Project from 'components/Project';
 import styles from './Projects.scss';
 
 const s = classNames.bind(styles);
@@ -47,7 +47,7 @@ class Projects extends Component {
     return (
       <DocumentTitle title={'Projekt'}>
         <main className={s({ container: true })}>
-          <h4>Alla projekt</h4>
+          <h1 className={s('heading')}>Alla projekt</h1>
           {this.getMarkup()}
         </main>
       </DocumentTitle>

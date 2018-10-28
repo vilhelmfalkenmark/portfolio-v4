@@ -7,9 +7,9 @@ const ParallaxHero = ({ imageUrl, title }) => {
   return (
     <section className={s('container')}>
       <picture
-        className={s('imageContainer')}
+        className={`${s('imageContainer')} lazyload`}
         style={{
-          backgroundImage: `url(${imageUrl})`
+          backgroundImage: `url(${imageUrl}?w=1600)`
         }}
       >
         <h1 className={s({ title: true })}>{title}</h1>

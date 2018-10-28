@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 /* SOLID BUTTON MIXIN */
 @define-mixin solidButton $color {
@@ -42,13 +42,13 @@
 }
 
 .button {
-  padding: var(--default-margin) var(--double-default-margin);
+  padding: var(--base-margin) var(--double-base-margin);
   display: inline-block;
   border: none;
   outline: 0;
   min-width: 10rem;
   cursor: pointer;
-  border-radius: var(--double-default-margin);
+  border-radius: var(--double-base-margin);
 
   /* Solid buttons */
 

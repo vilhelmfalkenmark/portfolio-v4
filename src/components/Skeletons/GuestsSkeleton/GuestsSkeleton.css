@@ -1,7 +1,7 @@
-@import "variables";
-@import "breakpoints";
-@import "grid";
-@import "skeleton";
+@import 'variables';
+@import 'breakpoints';
+@import 'grid';
+@import 'skeleton';
 
 .list {
   display: flex;
@@ -13,14 +13,14 @@
 
 .heading {
   text-align: center;
-  padding-bottom: var(--default-margin);
-  margin: 0 0 var(--double-default-margin);
+  padding-bottom: var(--base-margin);
+  margin: 0 0 var(--double-base-margin);
 
   position: relative;
   &::after {
     height: 4px;
     width: 4rem;
-    content: "";
+    content: '';
     position: absolute;
     background-color: var(--medium-grey);
     bottom: 0;

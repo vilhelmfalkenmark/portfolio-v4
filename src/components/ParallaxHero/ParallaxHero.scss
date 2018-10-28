@@ -17,10 +17,18 @@
   width: 100%;
   position: absolute;
   background-size: cover;
-  transform: translateZ(-1px);
-
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: top center;
+
+  &:after {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    background: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .title {
