@@ -1,9 +1,10 @@
-import React from "react";
-import ScrollDown from "components/ScrollDown";
+import React from 'react';
+import ScrollDown from 'components/ScrollDown';
+import Logo from 'components/Logo';
 // import Particles from "react-particles-js";
-import classNames from "classnames/bind";
+import classNames from 'classnames/bind';
 
-import styles from "./Hero.css";
+import styles from './Hero.css';
 
 const s = classNames.bind(styles);
 
@@ -31,7 +32,8 @@ const Hero = ({ infoFulfilled, scrollToContent = () => null }) => {
           top: 0,
           left: 0
         }}
-      /> */}
+			/> */}
+      <Logo className={s('logo')} />
       <figure className={s({ scroller: true })}>
         {infoFulfilled && <ScrollDown onClickCallback={scrollToContent} />}
       </figure>

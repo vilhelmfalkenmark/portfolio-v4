@@ -1,26 +1,13 @@
-@import "variables";
-@import "breakpoints";
+@import 'variables';
+@import 'breakpoints';
 
 .container {
-  width: 100%;
-}
-
-.logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.hashTag {
-  margin-left: var(--default-margin);
-  color: var(--text-grey);
-}
-
-.ville,
-.johanna {
-  height: 3rem;
-
-  @media (--viewport-min-960) {
-    height: 3.5rem;
-  }
+.logo {
+  height: 100%;
+  width: 100%;
 }

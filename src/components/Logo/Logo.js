@@ -1,15 +1,16 @@
-import React from "react";
+import React from 'react';
+import classNames from 'classnames/bind';
 
-import SVG from "components/SVG";
-import ville from "assets/svg/ville.svg";
-import WithStyles from "layout/WithStyles";
+import SVG from 'components/SVG';
+import ville from 'assets/svg/ville.svg';
+import styles from './Logo.css';
 
-import s from "./Logo.css";
+const s = classNames.bind(styles);
 
-const Logo = ({ copy }) => (
-  <figure className={s({ logo: true })}>
-    <SVG className={s({ ville: true })} svg={ville} />
+const Logo = ({ copy, className }) => (
+  <figure className={s({ container: true, [className]: className })}>
+    <SVG className={s('logo')} svg={ville} />
   </figure>
 );
 
-export default WithStyles(Logo, s);
+export default Logo;

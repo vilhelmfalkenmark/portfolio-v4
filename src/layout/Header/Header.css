@@ -1,6 +1,6 @@
-@import "variables";
-@import "breakpoints";
-@import "keyframes";
+@import 'variables';
+@import 'breakpoints';
+@import 'keyframes';
 
 .container {
   @media (--viewport-min-960) {
@@ -135,4 +135,9 @@
     display: inline-block;
     margin-left: 0.5rem;
   }
+}
+
+.logo {
+  height: 3.5rem;
+  width: 3.5rem;
 }

@@ -1,6 +1,6 @@
-@import "variables";
-@import "sofiaFont";
-@import "normalize";
+@import 'variables';
+@import 'sofiaFont';
+@import 'normalize';
 
 *,
 *::after,
@@ -18,11 +18,11 @@ picture {
   transition: opacity 200ms;
 }
 
-[class*="lazyload"] {
+[class*='lazyload'] {
   opacity: 0;
 }
 
-[class*="lazyloaded"] {
+[class*='lazyloaded'] {
   opacity: 1;
 }
 
@@ -30,7 +30,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-grey);
-  background-color: var(--app-background);
+  background-color: white;
   font-family: sofiaMedium;
   overflow-x: hidden;
   line-height: 1.6rem;

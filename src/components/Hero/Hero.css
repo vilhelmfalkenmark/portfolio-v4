@@ -1,5 +1,5 @@
-@import "variables";
-@import "grid";
+@import 'variables';
+@import 'grid';
 
 .container {
   position: relative;
@@ -22,7 +22,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    content: "";
+    content: '';
     background: linear-gradient(270deg, #4a2525, #111a54);
     opacity: 0.8;
   }
@@ -56,4 +56,9 @@
   right: 0;
   bottom: var(--triple-default-margin);
   z-index: var(--z-index-first);
+}
+
+.logo {
+  height: 10rem;
+  width: 10rem;
 }
